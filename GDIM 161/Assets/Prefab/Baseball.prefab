@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2374478818359960541}
   - component: {fileID: 2844426251505148604}
   - component: {fileID: 2844426251505148603}
+  - component: {fileID: 1085772914979264177}
   m_Layer: 0
   m_Name: Baseball
   m_TagString: Untagged
@@ -64,6 +65,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.7499844
   m_Center: {x: 0, y: 0, z: 0.018220544}
+--- !u!114 &1085772914979264177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3150275958145595751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eabb9ed8f18520499318a4cd78a5790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &6113799286012886804
 GameObject:
   m_ObjectHideFlags: 0

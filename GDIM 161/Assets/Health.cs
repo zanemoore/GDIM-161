@@ -29,7 +29,10 @@ public class Health : MonoBehaviour
     {
         currentHealth -= amount;
         CheckHealth();
-        Damaged(amount);
+        if (Damaged != null)
+        {
+            Damaged(amount);
+        }
     }
     
     public void Heal(float amount)
