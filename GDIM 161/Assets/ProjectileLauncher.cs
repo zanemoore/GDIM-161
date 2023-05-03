@@ -21,6 +21,7 @@ public class ProjectileLauncher : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && timeSinceLastLaunch > timeBetweenLaunches)
         {
             Launch();
+            timeSinceLastLaunch= 0f;
         }
     }
 
