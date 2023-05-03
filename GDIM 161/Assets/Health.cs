@@ -18,6 +18,13 @@ public class Health : MonoBehaviour
         Died += () => Destroy(this.gameObject); //currently, destroys the game object this is attached to. Delete this line later.
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Damage(10);
+        }
+    }
     public void Damage(float amount)
     {
         currentHealth -= amount;
@@ -40,7 +47,7 @@ public class Health : MonoBehaviour
     }
     private float CheckHealth()
     {
-        if (currentHealth < 0) { Died(); }
+        if (currentHealth <= 0) { Died(); }
         return currentHealth;
     }
 
