@@ -72278,6 +72278,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642654590600869888}
   m_Mesh: {fileID: 7937799822277563448, guid: c7bba6ae1d36cb24ca7c073f64c224d9, type: 3}
+--- !u!1001 &6600334595696154130
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1450585510426699430, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_Name
+      value: Baseball Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 519
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9649999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -163.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804400494242421702, guid: d563097692372884785844c40160b68d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d563097692372884785844c40160b68d, type: 3}
 --- !u!4 &6638216944525230038
 Transform:
   m_ObjectHideFlags: 0
@@ -72341,10 +72410,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1934899813008400963, guid: 8b0a2d95074cc8f4ea390e225948af19,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6065291058300853016, guid: 8b0a2d95074cc8f4ea390e225948af19,
         type: 3}
       propertyPath: m_Name
       value: Zombie Capsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065291058300853016, guid: 8b0a2d95074cc8f4ea390e225948af19,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6874725837087719842, guid: 8b0a2d95074cc8f4ea390e225948af19,
         type: 3}
@@ -72400,6 +72479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593118225770516238, guid: 8b0a2d95074cc8f4ea390e225948af19,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b0a2d95074cc8f4ea390e225948af19, type: 3}
