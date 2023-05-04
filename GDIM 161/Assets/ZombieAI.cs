@@ -26,12 +26,14 @@ public class ZombieAI : MonoBehaviour
     private GameObject target;
     private Vector3 playerPosition;
     private bool isAwareOfPlayer;
+    private ZombieSFXScript sfx;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         isAwareOfPlayer = false;
         playerPosition = Vector3.zero;
+        sfx = GetComponent<ZombieSFXScript>();
     }
 
 
@@ -74,6 +76,7 @@ public class ZombieAI : MonoBehaviour
             else
             {
                 isAwareOfPlayer = false;
+                sfx.idle();
             }
 
             if (isAwareOfPlayer == true)
@@ -86,6 +89,7 @@ public class ZombieAI : MonoBehaviour
 
     private void Chase()
     {
+        sfx.chase();
         agent.SetDestination(playerPosition);
         agent.transform.LookAt(playerPosition);
         Move(moveSpeed);
