@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ProjectileLauncher : MonoBehaviour
 {
@@ -27,7 +28,9 @@ public class ProjectileLauncher : MonoBehaviour
 
     void Launch()
     {
-        var projectile = Instantiate(projectilePrefab, handPosition.position, Quaternion.identity);
+        string projectileName = projectilePrefab.name;
+
+        var projectile = PhotonNetwork.Instantiate(projectileName, handPosition.position, Quaternion.identity);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(Camera.main.transform.forward * forwardForce + Camera.main.transform.up * verticalForce);
         if (Launched != null)
