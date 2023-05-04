@@ -24,57 +24,66 @@ public class ZombieSFXScript : MonoBehaviour
     {
         // src.volume = idleVol; for if I need to adjust the volume of each clip
 
-        randNum = (int)Random.Range(1, 4);
-        switch(randNum)
+        if (!src.isPlaying)
         {
-            case 1: 
-                src.clip = idle1;
-                src.Play();
-                break;
-            case 2: 
-                src.clip = idle2;
-                src.Play();
-                break;
-            case 3: 
-                src.clip = idle3;
-                src.Play();
-                break;
+            randNum = (int)Random.Range(1, 4);
+            switch(randNum)
+            {
+                case 1: 
+                    src.clip = idle1;
+                    src.Play();
+                    break;
+                case 2: 
+                    src.clip = idle2;
+                    src.Play();
+                    break;
+                case 3: 
+                    src.clip = idle3;
+                    src.Play();
+                    break;
+            }
         }
     }
 
     public void chase()
     {
-        randNum = Random.Range(1, 4);
-        switch(randNum)
+        if (!src.isPlaying)
         {
-            case 1: 
-                src.clip = chase1;
-                src.Play();
-                break;
-            case 2: 
-                src.clip = chase2;
-                src.Play();
-                break;
-            case 3: 
-                src.clip = chase3;
-                src.Play();
-                break;
+            randNum = Random.Range(1, 4);
+            switch(randNum)
+            {
+                case 1: 
+                    src.clip = chase1;
+                    src.Play();
+                    break;
+                case 2: 
+                    src.clip = chase2;
+                    src.Play();
+                    break;
+                case 3: 
+                    src.clip = chase3;
+                    src.Play();
+                    break;
+            }
         }
     }
 
     public void death()
     {
-        randNum = Random.Range(1, 3);
-        switch(randNum)
+        if (!src.isPlaying)
         {
-            case 1: 
-                src.clip = death1;
-                src.Play();
-                break;
-            case 2: 
-                src.clip = death2;
-                src.Play();
-                break;
+            randNum = Random.Range(1, 3);
+            switch(randNum)
+            {
+                case 1: 
+                    src.clip = death1;
+                    src.Play();
+                    break;
+                case 2: 
+                    src.clip = death2;
+                    src.Play();
+                    break;
+            }
         }
     }
 }
