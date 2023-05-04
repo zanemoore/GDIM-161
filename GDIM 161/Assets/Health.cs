@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Damage(10);
+            // Damage(10); (Hung this was making us mald lmaoooo) - DIego
         }
     }
     public void Damage(float amount)

@@ -18,8 +18,10 @@ public class ZombieAI : MonoBehaviour
     private LayerMask wallLayer;
     [SerializeField]
     private float moveSpeed;
+    /*
     [SerializeField]
     private float stopDistance;
+    */
 
     private GameObject target;
     private Vector3 playerPosition;

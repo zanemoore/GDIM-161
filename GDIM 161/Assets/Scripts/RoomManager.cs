@@ -10,7 +10,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject player;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private GameObject zombieSpawner;
+    [SerializeField] private GameObject[] zombieSpawner;
     [SerializeField] private GameObject zombie;
 
     int numberPlayers;
@@ -75,7 +75,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
 
-        zombieSpawner.SetActive(true);
+        for (int i = 0; i < zombieSpawner.Length; i++)
+        {
+            zombieSpawner[i].SetActive(true);
+        }
         health.enabled = true;
     }
 
