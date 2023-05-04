@@ -23,6 +23,9 @@ public class ZombieAI : MonoBehaviour
     private float stopDistance;
     */
 
+    [SerializeField] Animator animator;
+
+
     private GameObject target;
     private Vector3 playerPosition;
     private bool isAwareOfPlayer;
@@ -77,6 +80,7 @@ public class ZombieAI : MonoBehaviour
             {
                 isAwareOfPlayer = false;
                 sfx.idle();
+                animator.SetTrigger("Idle");
             }
 
             if (isAwareOfPlayer == true)
@@ -93,6 +97,7 @@ public class ZombieAI : MonoBehaviour
         agent.SetDestination(playerPosition);
         agent.transform.LookAt(playerPosition);
         Move(moveSpeed);
+        animator.SetTrigger("Walking");
     }
 
 

@@ -228,6 +228,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   moveSpeed: 5
+  animator: {fileID: 8309388795563304644}
 --- !u!195 &1545329018
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -789,6 +790,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d30ae6f59058ea4790c0d9389de2ac9, type: 3}
+--- !u!95 &8309388795563304644 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5091242708998600766, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3888677207966605050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8309388795573143888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5091242709008406442, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
