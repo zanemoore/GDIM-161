@@ -10,14 +10,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject player;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject zombieSpawner;
+    [SerializeField] private GameObject zombie;
 
     int numberPlayers;
     GameObject localPlayer;
+    private Health health;
 
     void Start()
     {
         Debug.Log(message:"Connecting...");
         PhotonNetwork.ConnectUsingSettings();
+        health = zombie.GetComponent<Health>();
     }
 
     void Update()
@@ -70,6 +74,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
+
+        zombieSpawner.SetActive(true);
+        health.enabled = true;
     }
 
     void CheckPlayers()

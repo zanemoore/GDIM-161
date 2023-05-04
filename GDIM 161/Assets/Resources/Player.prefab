@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2237173693905180744}
   - component: {fileID: 7324089150289279730}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 8568594454322209344}
   - component: {fileID: 8568594454322209347}
   - component: {fileID: 8568594454322209340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: -8356872645902728768}
   - component: {fileID: 8568594455046401692}
   - component: {fileID: 8568594455046401698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8568594455341467134}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grounded Checker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

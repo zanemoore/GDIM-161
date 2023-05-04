@@ -9,6 +9,7 @@ public class PlayerSetup : MonoBehaviour
     [SerializeField] private CharacterController playerController;
     [SerializeField] private GameObject playerCamera;
 
+
     public void IsLocalPlayer()
     {
         playerMovement.enabled = true;
@@ -16,5 +17,4 @@ public class PlayerSetup : MonoBehaviour
         playerController.enabled = true;
         playerCamera.SetActive(true);
     }
-
 }
