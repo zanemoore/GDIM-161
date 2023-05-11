@@ -84,6 +84,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 30
+  hitMarker: {fileID: 2176255493611229003, guid: 6bd8da860050fc04685cdd8f6d7de911,
+    type: 3}
 --- !u!82 &-8175257224670507592
 AudioSource:
   m_ObjectHideFlags: 0
@@ -215,9 +217,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1545329018}
-  target: {fileID: 0}
-  isAwareOfPlayer: 0
-  distanceThreshold: 10
+  viewRadius: 0
+  viewAngle: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  moveSpeed: 0
+  animator: {fileID: 0}
 --- !u!195 &1545329018
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -2,20 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     //created by Hung Bui
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
-
+    private bool hit = false;
+    private RawImage hitMarker;
     public Action Died; //subscribe functions upon death
     public Action<float> Damaged; //subscribe functions upon taking damage
 
     private void Awake()
     {
         currentHealth = maxHealth;
+        hitMarker = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<RawImage>();
         Died += () => Destroy(this.gameObject); //currently, destroys the game object this is attached to. Delete this line later.
+        hitMarker.enabled = false;
     }
 
     private void Update()
@@ -28,11 +32,13 @@ public class Health : MonoBehaviour
     public void Damage(float amount)
     {
         currentHealth -= amount;
+        FlashHitMarker();
         CheckHealth();
         if (Damaged != null)
         {
             Damaged(amount);
         }
+
     }
     
     public void Heal(float amount)
@@ -54,6 +60,15 @@ public class Health : MonoBehaviour
         return currentHealth;
     }
 
-
-
+    private void FlashHitMarker()
+    {
+        hitMarker.enabled = true;
+        hit = true;
+        Invoke("ResetHitMarker", 0.2f);
+    }
+    private void ResetHitMarker()
+    {
+        hitMarker.enabled = false;
+        hit = false;
+    }
 }
