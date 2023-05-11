@@ -25,6 +25,22 @@ public class HealthBar : MonoBehaviour
         slider.value = health;
     }
 
+    public void ChangeHealthColor()
+    {
+        if (slider.value <= 25)
+        {
+            image.color = Color.red;
+        }
+        else if (slider.value >= 50)
+        {
+            image.color = Color.green;
+        }
+        else
+        {
+            image.color = Color.yellow;
+        }
+    }
+
     void Start()
     {
         text.text = slider.value.ToString();
@@ -37,5 +53,7 @@ public class HealthBar : MonoBehaviour
     {
         image.enabled = true;
         text.text = slider.value.ToString();
+        ChangeHealthColor();
+        
     }
 }

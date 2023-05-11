@@ -56,7 +56,11 @@ public class Health : MonoBehaviour
     }
     private float CheckHealth()
     {
-        if (currentHealth <= 0) { Died(); }
+        if (currentHealth <= 0) {
+            FlashHitMarker();
+            ResetHitMarker();
+            Died(); 
+        }
         return currentHealth;
     }
 
