@@ -21,8 +21,16 @@ public class HealthBar : MonoBehaviour
 
     public void SetMaxHealth(int health)
     {
-        slider.maxValue = health;
+        slider.maxValue = 100f;
         slider.value = health;
+    }
+
+    public void DamageTest()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            slider.value -= 10;
+        }
     }
 
     public void ChangeHealthColor()
@@ -31,7 +39,7 @@ public class HealthBar : MonoBehaviour
         {
             image.color = Color.red;
         }
-        else if (slider.value >= 50)
+        else if (slider.value > 50)
         {
             image.color = Color.green;
         }
@@ -43,9 +51,9 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        text.text = slider.value.ToString();
-        image = bar.GetComponent<Image>();
-        image.enabled = false;
+         text.text = slider.value.ToString();
+         image = bar.GetComponent<Image>();
+        //image.enabled = true;
        
     }
 
