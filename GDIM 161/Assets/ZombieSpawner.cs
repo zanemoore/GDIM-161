@@ -9,23 +9,21 @@ public class ZombieSpawner : MonoBehaviour
     private GameObject zombiePrefab;
     [SerializeField]
     private int numberOfZombiesToSpawn;
+    [SerializeField]
+    private float spawnRadius;
 
     private int i;
 
     void Start()
     {
-        i = 0;
-    }
-
-
-    void Update()
-    {
         string name = zombiePrefab.name;
 
-        if (i < numberOfZombiesToSpawn)
+        for (int i = 0; i < numberOfZombiesToSpawn; i++)
         {
-            GameObject gameObject = PhotonNetwork.Instantiate(name, this.transform.position, Quaternion.identity);
-            i++;
+            Vector3 position = Random.insideUnitSphere * spawnRadius;
+            position.y = this.transform.position.y;
+            position += this.transform.position;
+            GameObject gameObject = PhotonNetwork.Instantiate(name, position, Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.up));
         }
     }
 }
