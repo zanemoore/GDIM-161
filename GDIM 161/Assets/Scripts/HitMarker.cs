@@ -6,7 +6,7 @@ public class HitMarker : MonoBehaviour
 {
     [SerializeField] private GameObject hitMarker;
     [SerializeField] private float flashTime = 2f;
-    [SerializeField] private Health health;
+    [SerializeField] private ZombieHealth health;
     // Start is called before the first frame update
     void Start()
     {

@@ -15,13 +15,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     int numberPlayers;
     GameObject localPlayer;
-    private Health health;
+    private ZombieHealth health;
 
     void Start()
     {
         Debug.Log(message:"Connecting...");
         PhotonNetwork.ConnectUsingSettings();
-        health = zombie.GetComponent<Health>();
+        health = zombie.GetComponent<ZombieHealth>();
     }
 
     void Update()
