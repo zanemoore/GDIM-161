@@ -8,23 +8,12 @@ public class Dart : MonoBehaviour
     [SerializeField] private float damage = 30f;
     private bool canDamage = true;
     public AudioSource src;
-    public AudioClip impact1, impact2, impact3;
+    public AudioClip impact1;
     private AudioClip impactToUse;
 
     private void Start()
     {
-        switch (Random.Range(1, 4))
-        {
-            case 1:
-                impactToUse = impact1;
-                break;
-            case 2:
-                impactToUse = impact2;
-                break;
-            case 3:
-                impactToUse = impact3;
-                break;
-        }
+        impactToUse = impact1;
     }
 
 
@@ -46,7 +35,7 @@ public class Dart : MonoBehaviour
             this.GetComponent<Rigidbody>().velocity= Vector3.zero;
             this.GetComponent<Collider>().enabled = false;
         }
-        src.volume = 1f;
+        src.volume = 1.5f;
         src.spatialBlend = 1f;
         src.PlayOneShot(impactToUse);
         Destroy(this.gameObject, 5f); // hardcoded to destroy after 5 seconds
