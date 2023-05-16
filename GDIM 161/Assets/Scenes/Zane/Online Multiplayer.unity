@@ -150,6 +150,11 @@ PrefabInstance:
       propertyPath: isAwareOfPlayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
+        type: 3}
+      propertyPath: numberOfZombiesToSpawn
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8922597683776901877, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
       propertyPath: m_RootOrder
@@ -721,6 +726,7 @@ MonoBehaviour:
   zombieSpawner:
   - {fileID: 1203883341}
   zombie: {fileID: 6065291058300853016, guid: 8b0a2d95074cc8f4ea390e225948af19, type: 3}
+  numberPlayers: 0
 --- !u!4 &1284745300
 Transform:
   m_ObjectHideFlags: 0
@@ -968,7 +974,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6527670528093515950, guid: d0a9bfb4b5f28174884e89dd76563ae8, type: 3}
+  - {fileID: 2100000, guid: 979aef027a1c86c42a15ce35fce366fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1191,7 +1197,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 0.15
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

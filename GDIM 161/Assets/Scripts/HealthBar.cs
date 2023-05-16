@@ -11,26 +11,14 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private GameObject bar;
     private Image image;
    
-    
-
-
     public void SetHealth(int health)
     {
         slider.value = health;
     }
 
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth(int maxHealth)
     {
-        slider.maxValue = 100f;
-        slider.value = health;
-    }
-
-    public void DamageTest()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            slider.value -= 10;
-        }
+        slider.maxValue = maxHealth;
     }
 
     public void ChangeHealthColor()

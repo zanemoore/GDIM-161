@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,10 +39,10 @@ public class Baseball : MonoBehaviour
             if (healthscript != null && canDamage)
             {
                 Debug.Log("Collision");
-                healthscript.Damage(damage);
-                canDamage= false;
+                healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage);
+                //healthscript.Damage(damage);
+                canDamage = false;
             }
-
         }
         src.volume = 1f;
         src.spatialBlend = 1f;

@@ -3,23 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using UnityEngine.AI;
 
 public class ZombieHealth : MonoBehaviour
 {
     //created by Hung Bui
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float currentHealth;
+    [SerializeField] private float despawnTime;
     private bool hit = false;
     private RawImage hitMarker;
     public Action Died; //subscribe functions upon death
     public Action<float> Damaged; //subscribe functions upon taking damage
+
+    [SerializeField] Animator animator;
 
     private void Awake()
     {
         currentHealth = maxHealth;
         hitMarker = GameObject.FindGameObjectWithTag("HitMarker").GetComponent<RawImage>();
         hitMarker.enabled = false;
-        Died += () => Destroy(this.gameObject); //currently, destroys the game object this is attached to. Delete this line later.
+        ///Died += () => PhotonNetwork.Destroy(this.gameObject); //currently, destroys the game object this is attached to. Delete this line later.
     }
 
     private void Update()
@@ -29,6 +34,8 @@ public class ZombieHealth : MonoBehaviour
             // Damage(10); (Hung this was making us mald lmaoooo) - DIego
         }
     }
+
+    [PunRPC]
     public void Damage(float amount)
     {
         currentHealth -= amount;
@@ -58,7 +65,8 @@ public class ZombieHealth : MonoBehaviour
     {
         if (currentHealth <= 0) {
             ResetHitMarker();
-            Died(); 
+            animator.SetBool("Death", true);
+            StartCoroutine("Despawn");
         }
         return currentHealth;
     }
@@ -73,5 +81,11 @@ public class ZombieHealth : MonoBehaviour
     {
         hitMarker.enabled = false;
         hit = false;
+    }
+
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(despawnTime);
+        PhotonNetwork.Destroy(this.gameObject);
     }
 }
