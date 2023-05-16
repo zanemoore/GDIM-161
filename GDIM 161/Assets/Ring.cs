@@ -2,23 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dart : MonoBehaviour
+public class Ring : MonoBehaviour
 {
     //perhaps make this a base class, in future versions
     [SerializeField] private float damage = 30f;
     private bool canDamage = true;
     public AudioSource src;
-    public AudioClip impact1;
+    public AudioClip impact1, impact2, impact3;
     private AudioClip impactToUse;
 
-    private void Start()
+    private void newImpact()
     {
-        impactToUse = impact1;
+        switch(Random.Range(1, 4))
+        {
+            case 1:
+                impactToUse = impact1;
+                break;
+            case 2:
+                impactToUse = impact2;
+                break;
+            case 3:
+                impactToUse = impact3;
+                break;
+        }
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
+        newImpact(); // loads a new impact sound for each coll, since this weapon can strike multiple enemies
 
         if (collision.collider.gameObject.layer == 10) //currently hardcoded to layer 10 = zombie
         {
@@ -41,3 +53,4 @@ public class Dart : MonoBehaviour
         Destroy(this.gameObject, 5f); // hardcoded to destroy after 5 seconds
     }
 }
+

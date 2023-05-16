@@ -4978,9 +4978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 200
   src: {fileID: 6864172759337621004}
-  impact1: {fileID: 8300000, guid: 7520c9fd84688204ca03ae96ebe7b8a9, type: 3}
-  impact2: {fileID: 8300000, guid: 137ef0afe3c1fb340a00b1eb13995454, type: 3}
-  impact3: {fileID: 8300000, guid: 4abfb003ab552934b9c75bef54d22326, type: 3}
+  impact1: {fileID: 8300000, guid: 441309fbad5c320469377f80d3f20d67, type: 3}
 --- !u!82 &6864172759337621004
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4990,10 +4988,11 @@ AudioSource:
   m_GameObject: {fileID: 5730679016496745233}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7520c9fd84688204ca03ae96ebe7b8a9, type: 3}
+  OutputAudioMixerGroup: {fileID: 2705558108075635334, guid: ec0355fb8a69bbe4782b5ec18df65e9c,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 35203dea6dc1b8e4bb103803ae507d77, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.555
   m_Pitch: 1
   Loop: 0
   Mute: 0
