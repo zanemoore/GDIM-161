@@ -61,6 +61,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[0].position, spawnPoints[0].rotation, 0);
             numberPlayers = 2;
+
+            for (int i = 0; i < zombieSpawner.Length; i++)
+            {
+                zombieSpawner[i].SetActive(true);
+            }
         }
         else if (numberPlayers == 2)
         {
@@ -79,14 +84,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
 
         localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
-
-        if(PhotonNetwork.IsMasterClient)
-        {
-            for (int i = 0; i < zombieSpawner.Length; i++)
-            {
-                zombieSpawner[i].SetActive(true);
-            }
-        }
     }
 
     void CheckPlayers()
