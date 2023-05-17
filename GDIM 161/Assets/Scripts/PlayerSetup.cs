@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSetup : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerMovement playerHealth;
+    [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private ProjectileLauncher projectileLauncher;
     [SerializeField] private CharacterController playerController;
     [SerializeField] private GameObject playerCamera;
