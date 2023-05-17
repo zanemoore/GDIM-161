@@ -166,12 +166,14 @@ public class ZombieAI : MonoBehaviour
         yield return new WaitForSeconds(1);
         foreach (GameObject p in players)
         {
+            PlayerHealth healthscript = p.GetComponent<PlayerHealth>();
+
             if (Time.time - attackTime > attackRate)
             {
-                if (p.GetComponent<PlayerHealth>())
+                if (healthscript != null)
                 {
                     attackTime = Time.time;
-                    p.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+                    healthscript.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
                 }
             }
         }
