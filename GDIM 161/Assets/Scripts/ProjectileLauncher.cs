@@ -7,7 +7,7 @@ using Photon.Pun;
 public class ProjectileLauncher : MonoBehaviour
 {
     //Written by Hung Bui
-    [SerializeField] private GameObject projectilePrefab;
+    //[SerializeField] private GameObject projectilePrefab; Now in projectileInfo
     [SerializeField] private Transform handPosition;
     //Perhaps, forward force, vertical force, and shoot time can be put into a scriptable object in the future
     [SerializeField] private ProjectileType projectileInfo;
@@ -28,9 +28,9 @@ public class ProjectileLauncher : MonoBehaviour
 
     void Launch()
     {
-        string projectileName = projectilePrefab.name;
+        //string projectileName = projectilePrefab.name; now in projectileInfo
 
-        var projectile = PhotonNetwork.Instantiate(projectileName, handPosition.position, Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up));
+        var projectile = PhotonNetwork.Instantiate( projectileInfo.prefab.name, handPosition.position, Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up));
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         rb.AddForce(Camera.main.transform.forward * projectileInfo.forwardForce + Camera.main.transform.up * projectileInfo.verticalForce);
         if (Launched != null)

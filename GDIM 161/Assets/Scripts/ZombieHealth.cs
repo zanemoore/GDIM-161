@@ -88,4 +88,13 @@ public class ZombieHealth : MonoBehaviour
         yield return new WaitForSeconds(despawnTime);
         PhotonNetwork.Destroy(this.gameObject);
     }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        Dart dart = collision.GetComponent<Dart>();
+        if (dart != null)
+        {
+            Damage(dart.getDamage());
+        }
+    }
 }

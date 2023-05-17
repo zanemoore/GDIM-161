@@ -16,7 +16,10 @@ public class Dart : MonoBehaviour
         impactToUse = impact1;
     }
 
-
+    public float getDamage()
+    {
+        return damage;
+    }
     private void OnCollisionEnter(Collision collision)
     {
 
