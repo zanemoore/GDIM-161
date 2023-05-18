@@ -188,31 +188,28 @@ public class ZombieAI : MonoBehaviour
 
     private void DamagePlayer()
     {
-        foreach (GameObject p in players)
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, viewRadius))
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, viewRadius))
+            if (hit.transform.gameObject.GetComponent<PlayerHealth>())
             {
-                if (hit.transform.gameObject.GetComponent<PlayerHealth>() && hit.transform.gameObject.GetComponent<PhotonView>().IsMine == true)
-                {
-                    //sfx.attack();
-                    hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, attackDamage);
-                }
+                //sfx.attack();
+                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, attackDamage);
             }
         }
 
         //foreach (GameObject p in players)
         //{
-            //PlayerHealth healthscript = p.GetComponent<PlayerHealth>();
+        //PlayerHealth healthscript = p.GetComponent<PlayerHealth>();
 
-            //if (healthscript != null)
-            //{
-                //attackTime = Time.time;
-                //healthscript.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
-            //}
+        //if (healthscript != null)
+        //{
+        //attackTime = Time.time;
+        //healthscript.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+        //}
         //}
     }
 
