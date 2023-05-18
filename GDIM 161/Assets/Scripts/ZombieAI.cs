@@ -127,6 +127,7 @@ public class ZombieAI : MonoBehaviour
                         {
                             isAttacking = false;
                             animator.SetBool("Attacking", false);
+                            Move(moveSpeed);
                         }
                     }
                 }
