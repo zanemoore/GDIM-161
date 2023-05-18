@@ -34,9 +34,9 @@ public class ZombieAI : MonoBehaviour
     private List<Transform> playerTransform;
 
     [SerializeField] 
-    Animator animator;
+    public Animator animator;
     [SerializeField] 
-    GameObject lookAt;
+    public GameObject lookAt;
 
     private Vector3 playerPosition;
     private bool isAwareOfPlayer;
