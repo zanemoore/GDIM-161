@@ -164,7 +164,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -373,6 +373,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 4698083807142985229}
   - {fileID: 7636217206908888363}
+  - {fileID: 3993056894449579027}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
