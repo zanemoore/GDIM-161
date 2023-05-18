@@ -3067,7 +3067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c2367c5dda84a45b37ce4c9a6e1dfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
   maxHealth: 100
   slider: {fileID: 5827562100399373095}
   text: {fileID: 7064705742872707823}
@@ -3125,6 +3124,7 @@ MonoBehaviour:
   projectileLauncher: {fileID: -2918176267259715199}
   playerController: {fileID: 8568594455046401697}
   playerCamera: {fileID: 8568594454322209351}
+  hitMarker: {fileID: 7410864307449742115}
 --- !u!114 &8568594455046401692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3555,6 +3555,12 @@ PrefabInstance:
 --- !u!224 &7410864307449742114 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9021776497357750528, guid: 830784f823a3adf4d93d79f871fc8851,
+    type: 3}
+  m_PrefabInstance: {fileID: 2011811878079283746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7410864307449742115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9021776497357750529, guid: 830784f823a3adf4d93d79f871fc8851,
     type: 3}
   m_PrefabInstance: {fileID: 2011811878079283746}
   m_PrefabAsset: {fileID: 0}
