@@ -59,6 +59,7 @@ public class ZombieAI : MonoBehaviour
     {
         // Checks if Zombie can see player
         ZombieView();
+
         playerTransform = GameObject.FindGameObjectsWithTag("Player").Select(go => go.transform).ToList();
 
         if ((isAwareOfPlayer == true) && (isAttacking == false))
@@ -137,7 +138,7 @@ public class ZombieAI : MonoBehaviour
 
             if (isAwareOfPlayer == true)
             {
-                playerPosition = new Vector3(player.position.x, player.position.y, player.position.z);
+                playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
             }
         }
     }
@@ -169,14 +170,13 @@ public class ZombieAI : MonoBehaviour
 
         sfx.chase();
         agent.SetDestination(playerPosition);
-        agent.transform.LookAt(playerPosition);
+        transform.LookAt(playerPosition);
         Move(moveSpeed);
     }
 
     private void Attack()
     {
-        agent.transform.LookAt(playerPosition);
-
+        transform.LookAt(playerPosition);
         agent.isStopped = true;
         agent.speed = 0;
 
