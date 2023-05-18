@@ -82,10 +82,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  currentHealth: 0
   src: {fileID: 182893981}
   impact1: {fileID: 8300000, guid: 7520c9fd84688204ca03ae96ebe7b8a9, type: 3}
   impact2: {fileID: 8300000, guid: 137ef0afe3c1fb340a00b1eb13995454, type: 3}
   impact3: {fileID: 8300000, guid: 4abfb003ab552934b9c75bef54d22326, type: 3}
+  hitMarker: {fileID: 0}
 --- !u!82 &182893981
 AudioSource:
   m_ObjectHideFlags: 0

@@ -13,8 +13,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject[] zombieSpawner;
     [SerializeField] private GameObject zombie;
 
+    //private bool spawnedSpawners;
     public int numberPlayers;
     GameObject localPlayer;
+    private ZombieSpawner spawner;
     private ZombieHealth health;
     private Animator animator;
 
@@ -60,30 +62,29 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (numberPlayers == 1)
         {
             localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[0].position, spawnPoints[0].rotation, 0);
-            numberPlayers = 2;
+        }
+        else if (numberPlayers == 2)
+        {
+            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[1].position, spawnPoints[1].rotation, 0);
+        }
+        else if (numberPlayers == 3)
+        {
+            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[2].position, spawnPoints[2].rotation, 0);
+        }
+        else if (numberPlayers == 4)
+        {
+            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[3].position, spawnPoints[3].rotation, 0);
+        }
 
+        localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
             for (int i = 0; i < zombieSpawner.Length; i++)
             {
                 zombieSpawner[i].SetActive(true);
             }
         }
-        else if (numberPlayers == 2)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[1].position, spawnPoints[1].rotation, 0);
-            numberPlayers = 3;
-        }
-        else if (numberPlayers == 3)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[2].position, spawnPoints[2].rotation, 0);
-            numberPlayers = 4;
-        }
-        else if (numberPlayers == 4)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[3].position, spawnPoints[3].rotation, 0);
-            numberPlayers = 1;
-        }
-
-        localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
     }
 
     void CheckPlayers()
@@ -95,7 +96,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             {
                 numberPlayers -= 4;
             }
-
         }
     }
 

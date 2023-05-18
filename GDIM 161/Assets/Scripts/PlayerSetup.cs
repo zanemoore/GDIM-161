@@ -9,7 +9,7 @@ public class PlayerSetup : MonoBehaviour
     [SerializeField] private ProjectileLauncher projectileLauncher;
     [SerializeField] private CharacterController playerController;
     [SerializeField] private GameObject playerCamera;
-
+    [SerializeField] private GameObject hitMarker;
 
     public void IsLocalPlayer()
     {
@@ -18,5 +18,6 @@ public class PlayerSetup : MonoBehaviour
         projectileLauncher.enabled = true;
         playerController.enabled = true;
         playerCamera.SetActive(true);
+        hitMarker.SetActive(true);
     }
 }

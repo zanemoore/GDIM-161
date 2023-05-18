@@ -7,13 +7,12 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private HealthBar healthBar;
     [SerializeField] private int maxHealth;
     [SerializeField] private Slider slider;
     [SerializeField] private TMP_Text text;
     [SerializeField] private GameObject bar;
-    private Image image;
 
+    private Image image;
     private int health;
 
     private void Start()
@@ -27,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
         SetHealth(health);
     }
 
-    void Update()
+    private void Update()
     {
         image.enabled = true;
         text.text = slider.value.ToString();
@@ -37,12 +36,15 @@ public class PlayerHealth : MonoBehaviour
     [PunRPC]
     public void TakeDamage(int damage)
     {
+        slider.value = health;
         health -= damage;
-        SetHealth(health);
 
         if (health <= 0)
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (GetComponent<PhotonView>().IsMine == true)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 

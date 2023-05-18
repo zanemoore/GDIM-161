@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using UnityEditor;
 using Photon.Realtime;
 using Photon.Pun;
+using System.Linq;
 
 public class ZombieAI : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class ZombieAI : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> players;
+    [SerializeField]
+    private List<Transform> playerTransform;
 
     [SerializeField] 
     Animator animator;
@@ -48,7 +51,6 @@ public class ZombieAI : MonoBehaviour
         sfx = GetComponent<ZombieSFXScript>();
         isAwareOfPlayer = false;
         isAttacking = false;
-        attackTime = 0;
         playerPosition = Vector3.zero;
     }
 
@@ -57,6 +59,7 @@ public class ZombieAI : MonoBehaviour
     {
         // Checks if Zombie can see player
         ZombieView();
+        playerTransform = GameObject.FindGameObjectsWithTag("Player").Select(go => go.transform).ToList();
 
         if ((isAwareOfPlayer == true) && (isAttacking == false))
         {
@@ -68,16 +71,16 @@ public class ZombieAI : MonoBehaviour
             animator.SetBool("Walking", false);
         }
 
-        for (int i = 0; i < players.Count; i++)
+        foreach (GameObject p in players)
         {
-            if (players[i] == null)
+            if (p == null)
             {
-                players.Remove(players[i]);
                 isAwareOfPlayer = false;
                 agent.isStopped = true;
                 agent.speed = 0;
                 animator.SetBool("Idle", true);
                 animator.SetBool("Attacking", false);
+                players.Remove(p);
             }
         }
 
@@ -85,7 +88,7 @@ public class ZombieAI : MonoBehaviour
         {
             isAwareOfPlayer = false;
             isAttacking = false;
-            transform.LookAt(lookAt.transform.position); // im lost...supposed to stop looking at player when in death animation
+            ///transform.LookAt(lookAt.transform.position); // im lost...supposed to stop looking at player when in death animation
             agent.isStopped = true;
             agent.speed = 0;
             animator.SetBool("Attacking", false);
@@ -95,27 +98,32 @@ public class ZombieAI : MonoBehaviour
 
     private void ZombieView()
     {
-        Collider[] playerInView = Physics.OverlapSphere(transform.position, viewRadius, playerLayer);
-        for (int i = 0; i < playerInView.Length; i++)
+        foreach (GameObject p in players)
         {
-            Transform player = playerInView[i].transform;
-            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+            Collider[] playerInView = Physics.OverlapSphere(transform.position, viewRadius, playerLayer);
 
-            if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2)
+            for (int i = 0; i < playerInView.Length; i++)
             {
-                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+                Transform player = playerInView[i].transform;
+                Vector3 directionToPlayer = (player.position - transform.position).normalized;
 
-                if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, wallLayer))
+                if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2)
                 {
-                    isAwareOfPlayer = true;
+                    float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-                    foreach (GameObject p in players)
+                    if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, wallLayer))
                     {
+                        isAwareOfPlayer = true;
+
                         if (Vector3.Distance(transform.position, p.transform.position) <= attackDistance)
                         {
+                            playerPosition = new Vector3(p.transform.position.x, transform.position.y, p.transform.position.z);
+                            transform.LookAt(playerPosition);
+                            agent.isStopped = true;
+                            agent.speed = 0;
                             isAttacking = true;
                             animator.SetBool("Attacking", true);
-                            AttackPlayer();
+                            Attack();
                         }
                         else
                         {
@@ -124,59 +132,88 @@ public class ZombieAI : MonoBehaviour
                         }
                     }
                 }
-            }
-            else
-            {
-                isAwareOfPlayer = false;
-                sfx.idle();
-            }
-
-            if (isAwareOfPlayer == true)
-            {
-                playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                else
+                {
+                    isAwareOfPlayer = false;
+                    sfx.idle();
+                }
             }
         }
+    }
+
+    Transform GetClosestPlayer(List<Transform> players)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (Transform potentialTarget in players)
+        {
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+            }
+        }
+
+        return bestTarget;
     }
 
 
     private void Chase()
     {
+        Transform near = GetClosestPlayer(playerTransform);
+        Vector3 nearPlayer = new Vector3(near.transform.position.x, transform.position.y, near.transform.position.z);
+
         sfx.chase();
-        agent.SetDestination(playerPosition);
-        transform.LookAt(playerPosition);
+        agent.SetDestination(nearPlayer);
+        transform.LookAt(nearPlayer);
         Move(moveSpeed);
     }
 
-    private void AttackPlayer()
+    private void Attack()
     {
-        if (isAttacking == true)
+        if (attackTime > 0)
         {
-            //sfx.attack();
-            transform.LookAt(playerPosition);
-            agent.isStopped = true;
-            agent.speed = 0;
+            attackTime -= Time.deltaTime;
         }
 
-        StartCoroutine("Delay");
-
+        if (attackTime <= 0)
+        {
+            attackTime = 1 / attackRate;
+            DamagePlayer();
+        }
     }
 
-    IEnumerator Delay()
+    private void DamagePlayer()
     {
-        yield return new WaitForSeconds(1);
         foreach (GameObject p in players)
         {
-            PlayerHealth healthscript = p.GetComponent<PlayerHealth>();
+            Ray ray = new Ray(transform.position, transform.forward);
 
-            if (Time.time - attackTime > attackRate)
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, viewRadius))
             {
-                if (healthscript != null)
+                if (hit.transform.gameObject.GetComponent<PlayerHealth>() && hit.transform.gameObject.GetComponent<PhotonView>().IsMine == true)
                 {
-                    attackTime = Time.time;
-                    healthscript.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+                    //sfx.attack();
+                    hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, attackDamage);
                 }
             }
         }
+
+        //foreach (GameObject p in players)
+        //{
+            //PlayerHealth healthscript = p.GetComponent<PlayerHealth>();
+
+            //if (healthscript != null)
+            //{
+                //attackTime = Time.time;
+                //healthscript.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+            //}
+        //}
     }
 
     private void Move(float speed)

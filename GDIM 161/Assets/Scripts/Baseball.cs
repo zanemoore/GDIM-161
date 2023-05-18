@@ -2,15 +2,20 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 public class Baseball : MonoBehaviour
 {
     //perhaps make this a base class, in future versions
     [SerializeField] private float damage = 10f;
+    [SerializeField] float currentHealth;
     private bool canDamage = true;
+    private bool hit = false;
     public AudioSource src;
     public AudioClip impact1, impact2, impact3;
     private AudioClip impactToUse;
+    [SerializeField] private RawImage hitMarker;
 
     private void Start()
     {
@@ -26,8 +31,22 @@ public class Baseball : MonoBehaviour
                 impactToUse = impact3;
                 break;
         }
+
+        hitMarker = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<RawImage>();
+        hitMarker.enabled = false;
     }
 
+    private void FlashHitMarker()
+    {
+        hitMarker.enabled = true;
+        hit = true;
+        Invoke("ResetHitMarker", 0.2f);
+    }
+    private void ResetHitMarker()
+    {
+        hitMarker.enabled = false;
+        hit = false;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -39,9 +58,11 @@ public class Baseball : MonoBehaviour
             if (healthscript != null && canDamage)
             {
                 Debug.Log("Collision");
-                healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage);
-                //healthscript.Damage(damage);
+                healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage); //healthscript.Damage(damage);
                 canDamage = false;
+                //currentHealth = healthscript.getHealth();
+                //currentHealth -= damage;
+                FlashHitMarker();
             }
         }
         src.volume = 1f;
