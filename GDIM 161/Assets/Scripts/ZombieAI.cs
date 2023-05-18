@@ -186,7 +186,7 @@ public class ZombieAI : MonoBehaviour
         }
     }
 
-    private void DamagePlayer()
+    void DamagePlayer()
     {
         Ray ray = new Ray(transform.position, transform.forward);
 
@@ -197,7 +197,7 @@ public class ZombieAI : MonoBehaviour
             if (hit.transform.gameObject.GetComponent<PlayerHealth>())
             {
                 //sfx.attack();
-                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, attackDamage);
+                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
             }
         }
 

@@ -860,7 +860,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2048,7 +2048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6849030981490986226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3071,6 +3071,7 @@ MonoBehaviour:
   slider: {fileID: 5827562100399373095}
   text: {fileID: 7064705742872707823}
   bar: {fileID: 2679198975959655704}
+  health: 0
 --- !u!114 &8568594455046401703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3123,6 +3124,7 @@ MonoBehaviour:
   projectileLauncher: {fileID: -2918176267259715199}
   playerController: {fileID: 8568594455046401697}
   playerCamera: {fileID: 8568594454322209351}
+  playerCanvas: {fileID: 6912000354265625126}
   hitMarker: {fileID: 7410864307449742115}
 --- !u!114 &8568594455046401692
 MonoBehaviour:
