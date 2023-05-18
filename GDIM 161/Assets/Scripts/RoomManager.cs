@@ -11,21 +11,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] zombieSpawner;
-    [SerializeField] private GameObject zombie;
 
     //private bool spawnedSpawners;
     public int numberPlayers;
     GameObject localPlayer;
     private ZombieSpawner spawner;
-    private ZombieHealth health;
-    private Animator animator;
 
     void Start()
     {
         Debug.Log(message:"Connecting...");
         PhotonNetwork.ConnectUsingSettings();
-        health = zombie.GetComponent<ZombieHealth>();
-        animator = zombie.GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -54,9 +49,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log(message: "Connected to a Room");
-
-        health.enabled = true;
-        animator.enabled = true;
 
         //determine which spawn point to use based on the number of players
         if (numberPlayers == 1)

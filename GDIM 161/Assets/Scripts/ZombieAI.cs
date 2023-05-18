@@ -136,9 +136,12 @@ public class ZombieAI : MonoBehaviour
                 sfx.idle();
             }
 
-            if (isAwareOfPlayer == true)
+            foreach (GameObject p in players)
             {
-                playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                if (isAwareOfPlayer == true)
+                {
+                    playerPosition = new Vector3(p.transform.position.x, transform.position.y, p.transform.position.z);
+                }
             }
         }
     }
