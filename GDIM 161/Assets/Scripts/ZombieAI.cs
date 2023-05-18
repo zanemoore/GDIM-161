@@ -34,9 +34,9 @@ public class ZombieAI : MonoBehaviour
     private List<Transform> playerTransform;
 
     [SerializeField] 
-    private Animator animator;
+    Animator animator;
     [SerializeField] 
-    private GameObject lookAt;
+    GameObject lookAt;
 
     private Vector3 playerPosition;
     private bool isAwareOfPlayer;
@@ -117,8 +117,6 @@ public class ZombieAI : MonoBehaviour
                     {
                         if (Vector3.Distance(transform.position, p.transform.position) <= attackDistance)
                         {
-                            playerPosition = new Vector3(p.transform.position.x, transform.position.y, p.transform.position.z);
-                            transform.LookAt(playerPosition);
                             isAttacking = true;
                             animator.SetBool("Attacking", true);
                             Attack();
@@ -127,7 +125,6 @@ public class ZombieAI : MonoBehaviour
                         {
                             isAttacking = false;
                             animator.SetBool("Attacking", false);
-                            Move(moveSpeed);
                         }
                     }
                 }
@@ -136,6 +133,11 @@ public class ZombieAI : MonoBehaviour
             {
                 isAwareOfPlayer = false;
                 sfx.idle();
+            }
+
+            if (isAwareOfPlayer == true)
+            {
+                playerPosition = new Vector3(player.position.x, player.position.y, player.position.z);
             }
         }
     }
@@ -162,20 +164,18 @@ public class ZombieAI : MonoBehaviour
 
     private void Chase()
     {
-        Transform near = GetClosestPlayer(playerTransform);
-        Vector3 nearPlayer = new Vector3(near.transform.position.x, transform.position.y, near.transform.position.z);
+        //Transform near = GetClosestPlayer(playerTransform);
+        //Vector3 nearPlayer = new Vector3(near.transform.position.x, transform.position.y, near.transform.position.z);
 
         sfx.chase();
-        agent.SetDestination(nearPlayer);
-        transform.LookAt(nearPlayer);
+        agent.SetDestination(playerPosition);
+        agent.transform.LookAt(playerPosition);
         Move(moveSpeed);
     }
 
     private void Attack()
     {
-        Transform near = GetClosestPlayer(playerTransform);
-        Vector3 nearPlayer = new Vector3(near.transform.position.x, transform.position.y, near.transform.position.z);
-        transform.LookAt(nearPlayer);
+        agent.transform.LookAt(playerPosition);
 
         agent.isStopped = true;
         agent.speed = 0;
