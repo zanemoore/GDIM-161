@@ -13,7 +13,6 @@ public class ZombieHealth : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] private float despawnTime;
     private bool hit = false;
-    private RawImage hitMarker;
     public Action Died; //subscribe functions upon death
     public Action<float> Damaged; //subscribe functions upon taking damage
 
@@ -22,8 +21,6 @@ public class ZombieHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        hitMarker = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<RawImage>();
-        hitMarker.enabled = false;
     }
 
     [PunRPC]
@@ -31,7 +28,6 @@ public class ZombieHealth : MonoBehaviour
     {
         currentHealth -= amount;
         CheckHealth();
-        //FlashHitMarker();
         if (Damaged != null)
         {
             Damaged(amount);
@@ -60,20 +56,6 @@ public class ZombieHealth : MonoBehaviour
         }
         return currentHealth;
     }
-
-    /*
-    private void FlashHitMarker()
-    {
-        hitMarker.enabled = true;
-        hit = true;
-        Invoke("ResetHitMarker", 0.2f);
-    }
-    private void ResetHitMarker()
-    {
-        hitMarker.enabled = false;
-        hit = false;
-    }
-    */
 
     IEnumerator Despawn()
     {

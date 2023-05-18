@@ -1,25 +1,46 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dart : MonoBehaviour
 {
     //perhaps make this a base class, in future versions
-    [SerializeField] private float damage = 30f;
+    [SerializeField] private float damage = 10f;
+    [SerializeField] float currentHealth;
     private bool canDamage = true;
+    private bool hit = false;
     public AudioSource src;
     public AudioClip impact1;
     private AudioClip impactToUse;
+    [SerializeField] private RawImage hitMarker;
 
     private void Start()
     {
         impactToUse = impact1;
+
+        hitMarker = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<RawImage>();
+        hitMarker.enabled = false;
     }
 
     public float getDamage()
     {
         return damage;
     }
+
+    private void FlashHitMarker()
+    {
+        hitMarker.enabled = true;
+        hit = true;
+        Invoke("ResetHitMarker", 0.2f);
+    }
+    private void ResetHitMarker()
+    {
+        hitMarker.enabled = false;
+        hit = false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -30,7 +51,10 @@ public class Dart : MonoBehaviour
             if (healthscript != null && canDamage)
             {
                 Debug.Log("Collision");
-                healthscript.Damage(damage);
+                healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage); //healthscript.Damage(damage);
+                //currentHealth = healthscript.getHealth();
+                //currentHealth -= damage;
+                FlashHitMarker();
             }
         }
         else

@@ -7,76 +7,60 @@ using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject[] players;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] zombieSpawner;
 
-    //private bool spawnedSpawners;
     public int numberPlayers;
-    GameObject localPlayer;
-    private ZombieSpawner spawner;
 
-    void Start()
+    private void Start()
     {
-        Debug.Log(message:"Connecting...");
-        PhotonNetwork.ConnectUsingSettings();
+        if (PhotonNetwork.LocalPlayer.CustomProperties["characterName"] == null)
+        {
+            PhotonNetwork.LocalPlayer.CustomProperties["characterName"] = 0;
+        }
+
+        if (PhotonNetwork.LocalPlayer.CustomProperties["characterIcon"] == null)
+        {
+            PhotonNetwork.LocalPlayer.CustomProperties["characterIcon"] = 0;
+        }
+
+        int randomNumber = Random.Range(0, spawnPoints.Length);
+        spawnPoint = spawnPoints[randomNumber];
+        GameObject playerToSpawn = players[(int)PhotonNetwork.LocalPlayer.CustomProperties["characterName"]];
+        PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, spawnPoint.rotation);
+
+
+        //determine which spawn point to use based on the number of players
+        /*
+        if (numberPlayers == 1)
+        {
+            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[0].position, spawnPoints[0].rotation, 0);
+        }
+        else if (numberPlayers == 2)
+        {
+            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[1].position, spawnPoints[1].rotation, 0);
+        }
+        else if (numberPlayers == 3)
+        {
+            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[2].position, spawnPoints[2].rotation, 0);
+        }
+        else if (numberPlayers == 4)
+        {
+            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[3].position, spawnPoints[3].rotation, 0);
+        }
+        */
+
+        //for (int i = 0; i < zombieSpawner.Length; i++)
+        {
+            //zombieSpawner[i].SetActive(true);
+        }
     }
 
     void Update()
     {
         CheckPlayers();
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        base.OnConnectedToMaster();
-        Debug.Log(message:"Connected to Server");
-        PhotonNetwork.JoinLobby();
-    }
-
-    public override void OnJoinedLobby()
-    {
-        RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 4;
-
-        base.OnJoinedLobby();
-        PhotonNetwork.JoinOrCreateRoom(roomName: "NA", roomOptions: options, typedLobby: null);
-        Debug.Log(message:"Joined a Lobby");
-    }
-
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-        Debug.Log(message: "Connected to a Room");
-
-        //determine which spawn point to use based on the number of players
-        if (numberPlayers == 1)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[0].position, spawnPoints[0].rotation, 0);
-        }
-        else if (numberPlayers == 2)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[1].position, spawnPoints[1].rotation, 0);
-        }
-        else if (numberPlayers == 3)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[2].position, spawnPoints[2].rotation, 0);
-        }
-        else if (numberPlayers == 4)
-        {
-            localPlayer = PhotonNetwork.Instantiate(player.name, spawnPoints[3].position, spawnPoints[3].rotation, 0);
-        }
-
-        localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            for (int i = 0; i < zombieSpawner.Length; i++)
-            {
-                zombieSpawner[i].SetActive(true);
-            }
-        }
     }
 
     void CheckPlayers()
