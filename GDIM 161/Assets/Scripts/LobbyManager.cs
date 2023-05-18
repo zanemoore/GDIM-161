@@ -150,7 +150,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickStartButton()
     {
-        PhotonNetwork.LoadLevel("FINAL BUILD SCENE");
+        PhotonNetwork.LoadLevel("FINAL BUILD Charlie");
     }
 
     void CheckPlayers()
