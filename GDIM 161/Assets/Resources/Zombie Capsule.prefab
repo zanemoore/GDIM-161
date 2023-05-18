@@ -373,7 +373,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 4698083807142985229}
   - {fileID: 7636217206908888363}
-  - {fileID: 488224765223116302}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -889,42 +889,6 @@ CapsuleCollider:
   m_Height: 0.3033675
   m_Direction: 0
   m_Center: {x: -0.10730103, y: 0.0050154193, z: -0.0058957324}
---- !u!1 &8309388795572655280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5091242709008108106, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
-    type: 3}
-  m_PrefabInstance: {fileID: 3888677207966605050}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &488224765223116302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8309388795572655280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 1
-    Name: Attacking
-  - Type: 4
-    SynchronizeType: 1
-    Name: Death
-  - Type: 4
-    SynchronizeType: 1
-    Name: Walking
-  - Type: 4
-    SynchronizeType: 1
-    Name: Idle
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!1 &8309388795572655360 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5091242709008108538, guid: 6d30ae6f59058ea4790c0d9389de2ac9,
