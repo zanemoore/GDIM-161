@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject bar;
 
     private Image image;
-    private int health;
+    public int health;
 
     private void Start()
     {
