@@ -93,6 +93,11 @@ public class ZombieAI : MonoBehaviour
             agent.speed = 0;
             animator.SetBool("Attacking", false);
         }
+
+        if(isAttacking == true)
+        {
+            animator.SetBool("Attacking", true);
+        }
     }
 
 
@@ -122,7 +127,6 @@ public class ZombieAI : MonoBehaviour
                             agent.isStopped = true;
                             agent.speed = 0;
                             isAttacking = true;
-                            animator.SetBool("Attacking", true);
                             Attack();
                         }
                         else
