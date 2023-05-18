@@ -101,7 +101,7 @@ public class ZombieAI : MonoBehaviour
     }
 
 
-    private void ZombieView()
+    void ZombieView()
     {
         foreach (GameObject p in players)
         {
