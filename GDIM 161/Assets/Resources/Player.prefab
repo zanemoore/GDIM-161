@@ -3106,8 +3106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52140f581124ab498f444b3b5c927d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3150275958145595751, guid: 5bf2c4deb8f5385499d7cc73228ef9d2,
-    type: 3}
   handPosition: {fileID: 2237173693905180744}
   projectileInfo: {fileID: 11400000, guid: 05e8da71d7675934383c45e23186cc83, type: 2}
 --- !u!114 &-8356872645902728768

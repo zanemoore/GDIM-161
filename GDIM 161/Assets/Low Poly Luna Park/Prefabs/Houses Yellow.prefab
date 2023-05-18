@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7580578214742854870}
   - component: {fileID: 7563139667476729157}
   - component: {fileID: 1089061206343353260}
+  - component: {fileID: 1165635106}
   m_Layer: 0
   m_Name: Houses Yellow
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8229030660006718723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2033, y: 1.2033, z: 1.2033}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5144180717440371677}
@@ -138,6 +139,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.0483947, y: 5.7053847, z: 4.048395}
   m_Center: {x: 0, y: 2.852692, z: 0.00000059604645}
+--- !u!208 &1165635106
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8229030660006718723}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.0240002, y: 2.8530002, z: 2.0240002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.8530002, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &121152009
 PrefabInstance:
   m_ObjectHideFlags: 0
