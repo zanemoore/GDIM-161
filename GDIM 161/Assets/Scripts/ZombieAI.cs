@@ -93,40 +93,34 @@ public class ZombieAI : MonoBehaviour
             agent.speed = 0;
             animator.SetBool("Attacking", false);
         }
-
-        if(isAttacking == true)
-        {
-            animator.SetBool("Attacking", true);
-        }
     }
 
 
     void ZombieView()
     {
-        foreach (GameObject p in players)
+        Collider[] playerInView = Physics.OverlapSphere(transform.position, viewRadius, playerLayer);
+
+        for (int i = 0; i < playerInView.Length; i++)
         {
-            Collider[] playerInView = Physics.OverlapSphere(transform.position, viewRadius, playerLayer);
+            Transform player = playerInView[i].transform;
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
 
-            for (int i = 0; i < playerInView.Length; i++)
+            if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2)
             {
-                Transform player = playerInView[i].transform;
-                Vector3 directionToPlayer = (player.position - transform.position).normalized;
+                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-                if (Vector3.Angle(transform.forward, directionToPlayer) < viewAngle / 2)
+                if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, wallLayer))
                 {
-                    float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+                    isAwareOfPlayer = true;
 
-                    if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, wallLayer))
+                    foreach (GameObject p in players)
                     {
-                        isAwareOfPlayer = true;
-
                         if (Vector3.Distance(transform.position, p.transform.position) <= attackDistance)
                         {
                             playerPosition = new Vector3(p.transform.position.x, transform.position.y, p.transform.position.z);
                             transform.LookAt(playerPosition);
-                            agent.isStopped = true;
-                            agent.speed = 0;
                             isAttacking = true;
+                            animator.SetBool("Attacking", true);
                             Attack();
                         }
                         else
@@ -136,11 +130,11 @@ public class ZombieAI : MonoBehaviour
                         }
                     }
                 }
-                else
-                {
-                    isAwareOfPlayer = false;
-                    sfx.idle();
-                }
+            }
+            else
+            {
+                isAwareOfPlayer = false;
+                sfx.idle();
             }
         }
     }
@@ -178,6 +172,13 @@ public class ZombieAI : MonoBehaviour
 
     private void Attack()
     {
+        Transform near = GetClosestPlayer(playerTransform);
+        Vector3 nearPlayer = new Vector3(near.transform.position.x, transform.position.y, near.transform.position.z);
+        transform.LookAt(nearPlayer);
+
+        agent.isStopped = true;
+        agent.speed = 0;
+
         if (attackTime > 0)
         {
             attackTime -= Time.deltaTime;
