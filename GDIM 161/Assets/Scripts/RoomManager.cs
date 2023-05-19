@@ -13,6 +13,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject[] zombieSpawner;
 
     public int numberPlayers;
+    GameObject localPlayer;
 
     private void Start()
     {
@@ -29,7 +30,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         int randomNumber = Random.Range(0, spawnPoints.Length);
         spawnPoint = spawnPoints[randomNumber];
         GameObject playerToSpawn = players[(int)PhotonNetwork.LocalPlayer.CustomProperties["characterName"]];
-        PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, spawnPoint.rotation);
+        localPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, spawnPoint.rotation);
+        localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
 
 
         //determine which spawn point to use based on the number of players
@@ -52,9 +54,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         */
 
-        //for (int i = 0; i < zombieSpawner.Length; i++)
+        for (int i = 0; i < zombieSpawner.Length; i++)
         {
-            //zombieSpawner[i].SetActive(true);
+            zombieSpawner[i].SetActive(true);
         }
     }
 
