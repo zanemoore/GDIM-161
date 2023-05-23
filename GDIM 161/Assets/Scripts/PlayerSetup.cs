@@ -9,7 +9,6 @@ public class PlayerSetup : MonoBehaviour
     [SerializeField] private CharacterController playerController;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject playerCanvas;
-    [SerializeField] private GameObject hitMarker;
 
     public void IsLocalPlayer()
     {
@@ -18,6 +17,5 @@ public class PlayerSetup : MonoBehaviour
         playerController.enabled = true;
         playerCamera.SetActive(true);
         playerCanvas.SetActive(true);
-        hitMarker.SetActive(true);
     }
 }

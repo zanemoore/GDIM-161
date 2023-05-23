@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 
-public class Baseball : MonoBehaviour
+public class Baseball : MonoBehaviourPunCallbacks
 {
     //perhaps make this a base class, in future versions
     [SerializeField] private float damage = 10f;
@@ -32,7 +32,7 @@ public class Baseball : MonoBehaviour
                 break;
         }
 
-        hitMarker = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<RawImage>();
+        hitMarker = GameObject.Find("Player Canvas").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
     }
 

@@ -1,10 +1,11 @@
 using Photon.Pun;
+using Photon.Chat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Dart : MonoBehaviour
+public class Dart : MonoBehaviourPunCallbacks
 {
     //perhaps make this a base class, in future versions
     [SerializeField] private float damage = 10f;
@@ -20,7 +21,7 @@ public class Dart : MonoBehaviour
     {
         impactToUse = impact1;
 
-        hitMarker = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<RawImage>();
+        hitMarker = GameObject.Find("Player Canvas").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
     }
 
@@ -43,7 +44,6 @@ public class Dart : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.collider.gameObject.layer == 10) //currently hardcoded to layer 10 = zombie
         {
             ZombieHealth healthscript = collision.collider.GetComponentInParent<ZombieHealth>();
@@ -54,7 +54,6 @@ public class Dart : MonoBehaviour
                 healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage); //healthscript.Damage(damage);
                 //currentHealth = healthscript.getHealth();
                 //currentHealth -= damage;
-                FlashHitMarker();
             }
         }
         else
@@ -66,5 +65,15 @@ public class Dart : MonoBehaviour
         src.spatialBlend = 1f;
         src.PlayOneShot(impactToUse);
         Destroy(this.gameObject, 5f); // hardcoded to destroy after 5 seconds
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        Collider trigger = collision.GetComponent<Collider>();
+
+        if (trigger.gameObject.layer == 10)
+        {
+            FlashHitMarker();
+        }
     }
 }
