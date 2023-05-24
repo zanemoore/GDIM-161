@@ -73,7 +73,7 @@ public class Dart : MonoBehaviourPunCallbacks
 
         if (trigger.gameObject.layer == 10)
         {
-            FlashHitMarker();
+            //FlashHitMarker();
         }
     }
 }

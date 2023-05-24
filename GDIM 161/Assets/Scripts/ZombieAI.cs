@@ -114,19 +114,16 @@ public class ZombieAI : MonoBehaviour
                 {
                     isAwareOfPlayer = true;
 
-                    foreach (GameObject p in players)
+                    if (Vector3.Distance(transform.position, player.transform.position) <= attackDistance)
                     {
-                        if (Vector3.Distance(transform.position, p.transform.position) <= attackDistance)
-                        {
-                            isAttacking = true;
-                            animator.SetBool("Attacking", true);
-                            Attack();
-                        }
-                        else
-                        {
-                            isAttacking = false;
-                            animator.SetBool("Attacking", false);
-                        }
+                        isAttacking = true;
+                        animator.SetBool("Attacking", true);
+                        Attack();
+                    }
+                    else
+                    {
+                        isAttacking = false;
+                        animator.SetBool("Attacking", false);
                     }
                 }
             }
@@ -136,13 +133,7 @@ public class ZombieAI : MonoBehaviour
                 sfx.idle();
             }
 
-            foreach (GameObject p in players)
-            {
-                if (isAwareOfPlayer == true)
-                {
-                    playerPosition = new Vector3(p.transform.position.x, transform.position.y, p.transform.position.z);
-                }
-            }
+            playerPosition = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         }
     }
 

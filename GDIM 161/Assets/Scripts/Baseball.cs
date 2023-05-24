@@ -62,7 +62,7 @@ public class Baseball : MonoBehaviourPunCallbacks
                 canDamage = false;
                 //currentHealth = healthscript.getHealth();
                 //currentHealth -= damage;
-                FlashHitMarker();
+                //FlashHitMarker();
             }
         }
         src.volume = 1f;
