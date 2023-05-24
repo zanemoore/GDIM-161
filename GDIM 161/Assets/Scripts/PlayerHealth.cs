@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour
     private Image image;
     public int health;
 
+    public CharacterAudio characterAudio;
+
     private void Start()
     {
         text.text = slider.value.ToString();
@@ -36,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
     [PunRPC]
     public void TakeDamage(int damage)
     {
+        characterAudio.playDmg();
         slider.value = health;
         health -= damage;
 
@@ -43,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (GetComponent<PhotonView>().IsMine == true)
             {
+                characterAudio.playDeath();
                 PhotonNetwork.Destroy(gameObject);
             }
         }

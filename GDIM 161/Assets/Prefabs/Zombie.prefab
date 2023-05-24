@@ -2045,7 +2045,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.705
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2148,7 +2148,7 @@ MonoBehaviour:
   chase1: {fileID: 8300000, guid: 6cbdc1f26efbecc4383b0726fd0e4226, type: 3}
   chase2: {fileID: 8300000, guid: 1d32aac5f8fd738419b807fc6d080624, type: 3}
   chase3: {fileID: 8300000, guid: 6bbfa2cbc5796774cac2f4910e94080f, type: 3}
-  death1: {fileID: 8300000, guid: 6999df8048116f748be7c8769b1f6411, type: 3}
+  death1: {fileID: 8300000, guid: be99eaa95f7aba843900f2cd48be81ed, type: 3}
   death2: {fileID: 8300000, guid: c15addf50e217b047a44701a82aecf83, type: 3}
 --- !u!114 &6594357687515873569
 MonoBehaviour:
@@ -2164,6 +2164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 30
+  despawnTime: 0
+  animator: {fileID: 0}
 --- !u!1 &6629225083940123030
 GameObject:
   m_ObjectHideFlags: 0
