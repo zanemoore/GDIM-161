@@ -71,8 +71,8 @@ public class ZombieHealth : MonoBehaviour
         Dart dart = collision.GetComponent<Dart>();
         if (dart != null)
         {
-            //dart.Hit(this.gameObject);
-            Damage(dart.getDamage());
+            dart.Hit(this.gameObject);
+            //Damage(dart.getDamage());
         }
 
         Ring ring = collision.GetComponent<Ring>();

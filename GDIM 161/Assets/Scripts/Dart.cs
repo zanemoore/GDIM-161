@@ -42,11 +42,11 @@ public class Dart : MonoBehaviourPunCallbacks
         hit = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void Hit(GameObject zombie)
     {
-        if (collision.collider.gameObject.layer == 10) //currently hardcoded to layer 10 = zombie
+        if (true) //currently hardcoded to layer 10 = zombie
         {
-            ZombieHealth healthscript = collision.collider.GetComponentInParent<ZombieHealth>();
+            ZombieHealth healthscript = zombie.GetComponentInParent<ZombieHealth>();
             Debug.Log(healthscript);
             if (healthscript != null && canDamage)
             {
@@ -55,11 +55,6 @@ public class Dart : MonoBehaviourPunCallbacks
                 //currentHealth = healthscript.getHealth();
                 //currentHealth -= damage;
             }
-        }
-        else
-        {
-            this.GetComponent<Rigidbody>().velocity= Vector3.zero;
-            this.GetComponent<Collider>().enabled = false;
         }
         src.volume = 1.5f;
         src.spatialBlend = 1f;
