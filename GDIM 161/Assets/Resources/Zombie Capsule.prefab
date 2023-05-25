@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: -2827758252206481346}
   - component: {fileID: 4698083807142985229}
   - component: {fileID: 7636217206908888363}
+  - component: {fileID: 5143149074183825049}
   m_Layer: 10
   m_Name: Zombie Capsule
   m_TagString: Untagged
@@ -409,6 +410,21 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &5143149074183825049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065291058300853016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3363776be8c6b489a0e0914893aa0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageMaterial: {fileID: 2100000, guid: 498dd2196a6127b4a89facd85423494c, type: 2}
+  actualMaterial: {fileID: 2100000, guid: 0d4cc1496f8ed6f4eb11a190b720e5f7, type: 2}
+  skin: {fileID: 8309388795567446020}
 --- !u!1 &8309388795572655264
 GameObject:
   m_ObjectHideFlags: 0
