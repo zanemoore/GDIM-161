@@ -3110,7 +3110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPosition: {fileID: 2237173693905180744}
-  projectileInfo: {fileID: 11400000, guid: 4d3752422ba37ce46bbe16fe854c1509, type: 2}
+  projectileInfo: {fileID: 11400000, guid: 5f953bdd3ae1f0c46a8eb2f7b9e52cda, type: 2}
 --- !u!114 &-8356872645902728768
 MonoBehaviour:
   m_ObjectHideFlags: 0
