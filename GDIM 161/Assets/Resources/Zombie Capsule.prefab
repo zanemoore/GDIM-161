@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5273333831829007302}
   m_Layer: 10
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 8034954353611009165}
   m_Layer: 10
   m_Name: Zombie Capsule
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,12 +325,12 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2.25
+  m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &1545329017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,14 +349,17 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
-  zombieLayer:
+  spectatorLayer:
     serializedVersion: 2
     m_Bits: 0
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
   moveSpeed: 6
-  attackDamage: 2
+  attackDamage: 1
   attackRate: 1
   attackDistance: 3
   players: []
@@ -493,7 +496,7 @@ GameObject:
   - component: {fileID: 8309388795573143872}
   m_Layer: 10
   m_Name: Bone_ R Toe0
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -525,7 +528,7 @@ GameObject:
   - component: {fileID: 8309388795573143874}
   m_Layer: 10
   m_Name: Bone_ R Toe0Nub
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -557,7 +560,7 @@ GameObject:
   - component: {fileID: 1222451981623048986}
   m_Layer: 10
   m_Name: Bone_ R Hand
-  m_TagString: Untagged
+  m_TagString: Zombie Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -607,7 +610,7 @@ GameObject:
   - component: {fileID: 8387128168672187369}
   m_Layer: 10
   m_Name: Bone_ R Thigh
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -654,7 +657,7 @@ GameObject:
   - component: {fileID: 4580768670684652209}
   m_Layer: 10
   m_Name: Bone_ Spine1
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -700,7 +703,7 @@ GameObject:
   - component: {fileID: 8309388795573143882}
   m_Layer: 10
   m_Name: Bone_ Spine2
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -735,7 +738,7 @@ GameObject:
   - component: {fileID: 392671324932557357}
   m_Layer: 10
   m_Name: Bone_ R UpperArm
-  m_TagString: Untagged
+  m_TagString: Zombie Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -781,7 +784,7 @@ GameObject:
   - component: {fileID: 8309388795573143886}
   m_Layer: 10
   m_Name: Bone_ Spine
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -813,7 +816,7 @@ GameObject:
   - component: {fileID: 8309388795573143888}
   m_Layer: 10
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -846,7 +849,7 @@ GameObject:
   - component: {fileID: 8309388795573143890}
   m_Layer: 10
   m_Name: RootJoint
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -878,7 +881,7 @@ GameObject:
   - component: {fileID: 8309388795573143892}
   m_Layer: 10
   m_Name: Bone_L Toe0
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1050,7 +1053,7 @@ GameObject:
   - component: {fileID: 2193179876831091474}
   m_Layer: 10
   m_Name: Bone_ L Calf
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1098,7 +1101,7 @@ GameObject:
   - component: {fileID: 6432182274065642922}
   m_Layer: 10
   m_Name: Bone_ L Clavicle
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1144,7 +1147,7 @@ GameObject:
   - component: {fileID: 8309388795573143844}
   m_Layer: 10
   m_Name: Bone_ Head
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1177,7 +1180,7 @@ GameObject:
   - component: {fileID: 8309388795573143846}
   m_Layer: 10
   m_Name: Bone_ HeadNub
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1980,7 +1983,7 @@ GameObject:
   - component: {fileID: 6980433165643343678}
   m_Layer: 10
   m_Name: Bone_ R Foot
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2027,7 +2030,7 @@ GameObject:
   - component: {fileID: 4896020446968460313}
   m_Layer: 10
   m_Name: Bone_ R Forearm
-  m_TagString: Untagged
+  m_TagString: Zombie Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2266,7 +2269,7 @@ GameObject:
   - component: {fileID: 487961574335091242}
   m_Layer: 10
   m_Name: Bone_ L Hand
-  m_TagString: Untagged
+  m_TagString: Zombie Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2316,7 +2319,7 @@ GameObject:
   - component: {fileID: 175124747572098774}
   m_Layer: 10
   m_Name: Bone_ L Thigh
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2363,7 +2366,7 @@ GameObject:
   - component: {fileID: 8717283151742507392}
   m_Layer: 10
   m_Name: Bone_ L Foot
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2410,7 +2413,7 @@ GameObject:
   - component: {fileID: 810919205645391152}
   m_Layer: 10
   m_Name: Bone_ L Forearm
-  m_TagString: Untagged
+  m_TagString: Zombie Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2456,7 +2459,7 @@ GameObject:
   - component: {fileID: 8309388795573143824}
   m_Layer: 10
   m_Name: Bone_ Neck
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2488,7 +2491,7 @@ GameObject:
   - component: {fileID: 8309388795573143826}
   m_Layer: 10
   m_Name: Bone_ Pelvis
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2522,7 +2525,7 @@ GameObject:
   - component: {fileID: 8309388795573143828}
   m_Layer: 10
   m_Name: Bone_ L Toe0Nub
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2554,7 +2557,7 @@ GameObject:
   - component: {fileID: 4784391749866923959}
   m_Layer: 10
   m_Name: Bone_ L UpperArm
-  m_TagString: Untagged
+  m_TagString: Zombie Arm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2665,7 +2668,7 @@ GameObject:
   - component: {fileID: 601774487816490507}
   m_Layer: 10
   m_Name: Bone_ R Calf
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2712,7 +2715,7 @@ GameObject:
   - component: {fileID: 3233551978409342535}
   m_Layer: 10
   m_Name: Bone_ R Clavicle
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

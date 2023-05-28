@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     public int health;
 
     public CharacterAudio characterAudio;
+    public SpectatorMode spectatorMode;
 
     private void Start()
     {
@@ -47,7 +48,8 @@ public class PlayerHealth : MonoBehaviour
             if (GetComponent<PhotonView>().IsMine == true)
             {
                 characterAudio.playDeath();
-                PhotonNetwork.Destroy(gameObject);
+                spectatorMode.enabled = true;
+                //PhotonNetwork.Destroy(gameObject);
             }
         }
     }

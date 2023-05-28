@@ -18,6 +18,8 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     [SerializeField]
     private LayerMask playerLayer;
     [SerializeField]
+    private LayerMask spectatorLayer;
+    [SerializeField]
     private LayerMask zombieLayer;
     [SerializeField]
     private LayerMask wallLayer;
@@ -40,7 +42,7 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     [SerializeField] 
     GameObject lookAt;
     [SerializeField]
-    private Collider[] zombieColliders;
+    private List<GameObject> zombieColliders;
 
     private Vector3 playerPosition;
     private bool isAwareOfPlayer;
@@ -51,12 +53,20 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     void Start()
     {
         players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        zombieColliders = GetComponentsInChildren<Collider>();
+        zombieColliders = new List<GameObject>(GameObject.FindGameObjectsWithTag("Zombie Arm"));
         agent = GetComponent<NavMeshAgent>();
         sfx = GetComponent<ZombieSFXScript>();
         isAwareOfPlayer = false;
         isAttacking = false;
         playerPosition = Vector3.zero;
+
+        foreach (GameObject z in zombieColliders)
+        {
+            foreach (GameObject p in players)
+            {
+                Physics.IgnoreCollision(p.GetComponent<CharacterController>(), z.GetComponent<Collider>(), true);
+            }
+        }
     }
 
 
@@ -82,13 +92,13 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
         foreach (GameObject p in players)
         {
-            if (p == null)
+            if (p.GetComponent<PlayerHealth>().health <= 0)
             {
                 isAwareOfPlayer = false;
+                isAttacking = false;
                 agent.isStopped = true;
                 agent.speed = 0;
                 animator.SetBool("Idle", true);
-                animator.SetBool("Attacking", false);
                 players.Remove(p);
             }
         }
@@ -188,6 +198,8 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
     private void Attack()
     {
+        Vector3 currentPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        agent.SetDestination(currentPosition);
         transform.LookAt(playerPosition);
         agent.isStopped = true;
         agent.speed = 0;
@@ -202,14 +214,6 @@ public class ZombieAI : MonoBehaviourPunCallbacks
             attackTime = 1 / attackRate;
             DamagePlayer();
         }
-
-        foreach (GameObject p in players)
-        {
-            foreach (Collider c in zombieColliders)
-            {
-                Physics.IgnoreCollision(c.GetComponent<Collider>(), p.GetComponent<Collider>());
-            }
-        }
     }
 
     void DamagePlayer()
@@ -220,23 +224,12 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, viewRadius))
         {
-            if (hit.transform.gameObject.GetComponent<PlayerHealth>())
+            if (hit.transform.gameObject.GetComponent<PlayerHealth>() && hit.transform.gameObject.tag != "SpectatorCamera")
             {
                 //sfx.attack();
                 hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
             }
         }
-
-        //foreach (GameObject p in players)
-        //{
-        //PlayerHealth healthscript = p.GetComponent<PlayerHealth>();
-
-        //if (healthscript != null)
-        //{
-        //attackTime = Time.time;
-        //healthscript.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
-        //}
-        //}
     }
 
     private void Move(float speed)

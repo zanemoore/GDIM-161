@@ -7,9 +7,7 @@ public class MouseLook : MonoBehaviour
     [Header("Settings")]
     public Vector2 clampInDegrees = new Vector2(360, 180);
     public bool lockCursor = true;
-    [Space]
-    private Vector2 sensitivity = new Vector2(2, 2);
-    [Space]
+    public Vector2 sensitivity = new Vector2(2, 2);
     public Vector2 smoothing = new Vector2(3, 3);
 
     [Header("First Person")]

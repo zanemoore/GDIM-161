@@ -17,10 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGrounded;
     private Vector3 velocity;
+    private float walk;
+    private float run;
 
     private void Start()
     {
-
+        walk = walkSpeed;
+        run = runSpeed;
     }
 
     void Update()
@@ -41,16 +44,33 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = transform.right * keyboardX + transform.forward * keyboardZ;
 
         //allows player to move and controls the speed of walking
-
         if (Input.GetKey("left shift"))
         {
-            //controls speed of running
-            controller.Move(movement * runSpeed * Time.deltaTime);
+            //makes player run
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                //controls speed of running backwards
+                controller.Move(movement * (runSpeed / 2f) * Time.deltaTime);
+            }
+            else
+            {
+                //controls speed of running forward
+                controller.Move(movement * runSpeed * Time.deltaTime);
+            }
         }
         else
         {
-            //controls speed of walking
-            controller.Move(movement * walkSpeed * Time.deltaTime);
+            //makes player walk
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                //controls speed of walking backwards
+                controller.Move(movement * (walkSpeed/2f) * Time.deltaTime);
+            }
+            else
+            {
+                //controls speed of walking forward
+                controller.Move(movement * walkSpeed * Time.deltaTime);
+            }
         }
 
         //increases velocity as player falls

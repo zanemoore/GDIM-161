@@ -143,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
       propertyPath: spawnRadius
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
@@ -244,7 +244,7 @@ PrefabInstance:
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
       propertyPath: spawnRadius
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
@@ -339,7 +339,7 @@ PrefabInstance:
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
       propertyPath: spawnRadius
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
@@ -700,7 +700,7 @@ PrefabInstance:
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
       propertyPath: spawnRadius
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3165228284872405801, guid: cf077558fd1dae44db031ba56d0ff735,
         type: 3}
