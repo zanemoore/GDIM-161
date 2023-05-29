@@ -24,7 +24,6 @@ public class SpectatorMode : MonoBehaviour
     [SerializeField] private KeyCode fastKey;
 
     [Header("Spectator Components")]
-    [SerializeField] private GameObject spectatorCamera;
     [SerializeField] private GameObject spectatorCanvas;
 
     [Header("Player Components")]
@@ -58,7 +57,6 @@ public class SpectatorMode : MonoBehaviour
         projectileLauncher.enabled = false;
         characterAudio.enabled = false;
 
-        spectatorCamera.SetActive(true);
         spectatorCanvas.SetActive(true);
 
         targetDirection = transform.localRotation.eulerAngles;

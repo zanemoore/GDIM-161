@@ -9,40 +9,24 @@ using System.Linq;
 
 public class ZombieAI : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private NavMeshAgent agent;
-    [SerializeField]
-    private float viewRadius;
-    [SerializeField]
-    private float viewAngle;
-    [SerializeField]
-    private LayerMask playerLayer;
-    [SerializeField]
-    private LayerMask spectatorLayer;
-    [SerializeField]
-    private LayerMask zombieLayer;
-    [SerializeField]
-    private LayerMask wallLayer;
-    [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
-    private int attackDamage;
-    [SerializeField]
-    private float attackRate;
-    [SerializeField]
-    private float attackDistance;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private float viewRadius;
+    [SerializeField] private float viewAngle;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask spectatorLayer;
+    [SerializeField] private LayerMask zombieLayer;
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private int attackDamage;
+    [SerializeField] private float attackRate;
+    [SerializeField] private float attackDistance;
 
-    [SerializeField]
-    private List<GameObject> players;
-    [SerializeField]
-    private List<Transform> playerTransform;
+    [SerializeField] private List<GameObject> players;
+    [SerializeField] private List<Transform> playerTransform;
 
-    [SerializeField] 
-    Animator animator;
-    [SerializeField] 
-    GameObject lookAt;
-    [SerializeField]
-    private List<GameObject> zombieColliders;
+    [SerializeField] Animator animator;
+    [SerializeField] GameObject lookAt;
+    [SerializeField] private List<GameObject> zombieColliders;
 
     private Vector3 playerPosition;
     private bool isAwareOfPlayer;

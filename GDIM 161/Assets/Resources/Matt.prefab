@@ -1868,7 +1868,7 @@ Canvas:
   m_GameObject: {fileID: 5932052744313048487}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1876,7 +1876,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3048,7 +3048,7 @@ GameObject:
   - component: {fileID: 1422217567262355493}
   - component: {fileID: 8568594455046401703}
   - component: {fileID: -2918176267259715199}
-  - component: {fileID: 1874393716254070383}
+  - component: {fileID: 324168033628223136}
   - component: {fileID: -9203933407708307865}
   - component: {fileID: 8466361225024807597}
   m_Layer: 6
@@ -3235,7 +3235,7 @@ MonoBehaviour:
   bar: {fileID: 2679198975959655704}
   health: 0
   characterAudio: {fileID: -9203933407708307865}
-  spectatorMode: {fileID: 1874393716254070383}
+  spectatorCamera: {fileID: 8912154640382308278}
 --- !u!114 &8568594455046401703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3272,45 +3272,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handPosition: {fileID: 2237173693905180744}
   projectileInfo: {fileID: 11400000, guid: 05e8da71d7675934383c45e23186cc83, type: 2}
---- !u!114 &1874393716254070383
+--- !u!114 &324168033628223136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8568594455046401706}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba04974ad67672b4ea23d7841a63897e, type: 3}
+  m_Script: {fileID: 11500000, guid: e8dce1c884281ac42ac5ef7cfa40f6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampInDegrees: {x: 360, y: 180}
-  smoothing: {x: 3, y: 3}
-  boundMinimumX: -70
-  boundMaximumX: 70
-  boundMinimumY: 5
-  boundMaximumY: 20
-  boundMinimumZ: -70
-  boundMaximumZ: 70
-  sensitivity: 5
-  normalSpeed: 5
-  verticalSpeed: 2
-  slowSpeed: 3
-  fastSpeed: 10
-  slowKey: 308
-  fastKey: 304
-  spectatorCamera: {fileID: 8912154640382308278}
-  spectatorCanvas: {fileID: 5932052744313048487}
-  playerCamera: {fileID: 8568594454322209351}
-  playerReticle: {fileID: 8100008281540792652}
-  playerHealthbar: {fileID: 8492074621884413178}
-  meshRenderer: {fileID: 8568594455046401700}
-  capsuleCollider: {fileID: 3277770405806419944}
-  characterController: {fileID: 8568594455046401697}
-  playerHealth: {fileID: 1422217567262355493}
-  playerMovement: {fileID: 8568594455046401703}
-  projectileLauncher: {fileID: -2918176267259715199}
-  characterAudio: {fileID: -9203933407708307865}
+  blockers:
+  - {fileID: 5938824153910564330}
+  - {fileID: 4212916349670379226}
+  - {fileID: 1680173354549383936}
+  - {fileID: 1591761182624647316}
+  health: {fileID: 8448741467502675035}
+  totalHealth: 76
 --- !u!114 &-9203933407708307865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3618,7 +3598,7 @@ GameObject:
   - component: {fileID: 860029044420696719}
   - component: {fileID: 7549288512829218271}
   - component: {fileID: 78926862972430238}
-  - component: {fileID: 11904052174132184}
+  - component: {fileID: 1615272838371279951}
   m_Layer: 2
   m_Name: Spectator Camera
   m_TagString: SpectatorCamera
@@ -3725,19 +3705,44 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!65 &11904052174132184
-BoxCollider:
+--- !u!114 &1615272838371279951
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8912154640382308278}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba04974ad67672b4ea23d7841a63897e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clampInDegrees: {x: 360, y: 180}
+  smoothing: {x: 3, y: 3}
+  boundMinimumX: -70
+  boundMaximumX: 70
+  boundMinimumY: 2
+  boundMaximumY: 20
+  boundMinimumZ: -70
+  boundMaximumZ: 70
+  sensitivity: 2
+  normalSpeed: 5
+  verticalSpeed: 2
+  slowSpeed: 3
+  fastSpeed: 10
+  slowKey: 308
+  fastKey: 304
+  spectatorCanvas: {fileID: 5932052744313048487}
+  playerCamera: {fileID: 8568594454322209351}
+  playerReticle: {fileID: 8100008281540792652}
+  playerHealthbar: {fileID: 8492074621884413178}
+  meshRenderer: {fileID: 8568594455046401700}
+  capsuleCollider: {fileID: 3277770405806419944}
+  characterController: {fileID: 8568594455046401697}
+  playerHealth: {fileID: 1422217567262355493}
+  playerMovement: {fileID: 8568594455046401703}
+  projectileLauncher: {fileID: -2918176267259715199}
+  characterAudio: {fileID: -9203933407708307865}
 --- !u!1 &9189348624878803747
 GameObject:
   m_ObjectHideFlags: 0
