@@ -150,7 +150,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void OnClickStartButton()
     {
-        PhotonNetwork.LoadLevel("Online Multiplayer");
+        PhotonNetwork.LoadLevel("Final Build");
     }
 
     void CheckPlayers()
