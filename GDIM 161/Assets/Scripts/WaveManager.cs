@@ -13,9 +13,9 @@ public class WaveManager : MonoBehaviour
 
     [Header("Spawners")]
     [SerializeField] private int _totalNumWaves;
-    [SerializeField] private List<ZombieSpawner> _zombieSpawners;
+    [SerializeField] private List<GameObject> _waveZombieSpawners;
     [SerializeField] private bool _useDefaultNumZombiesToSpawn;
-    [SerializeField] private int _initialNumZombies;
+    [SerializeField] private int _initialTotalNumZombies;
     [SerializeField] private int _addtionalNumZombiesPerWave;
 
     [Header("Zombies")]
@@ -30,11 +30,14 @@ public class WaveManager : MonoBehaviour
 
     private int _currWave;
     private bool _sendWaves;
+    private int _numZombiesSpawned;
+
 
     void Start()
     {
         _currWave = 0;
         _sendWaves = false;
+        _numZombiesSpawned = 0;
     }
 
 
@@ -56,14 +59,14 @@ public class WaveManager : MonoBehaviour
 
     public void SetUp()
     {
+        _sendWaves = true;
+
         // Might be nice to make it smooth in the future - Diego
         _entrancePrefab.transform.position = new Vector3(_entrancePrefab.transform.position.x, _closedEntranceHeight, _entrancePrefab.transform.position.z);
 
         _objectiveInstruction.gameObject.SetActive(true);
         _objectiveInstruction.text = "Survive Until the Gate Opens";
         Invoke("DisableObjectiveInstruction", _timeOnScreen);
-
-        _sendWaves = true;
     }
 
 
@@ -72,20 +75,32 @@ public class WaveManager : MonoBehaviour
         // Check if all the zombies died lol
         // Keep track of number of zombie kills?
         // ^ use actions from Die script to here :p?
-        return true;
+        return _numZombiesSpawned == 0;
     }
 
 
     private void SendNewWave()
     {
+        // Make zombies stronger here (speed and damage)
+
+        foreach (GameObject spawnerPrefab in _waveZombieSpawners)
+        {
+            ZombieSpawner spawner = spawnerPrefab.GetComponent<ZombieSpawner>();
+
+            if (!_useDefaultNumZombiesToSpawn)
+            {
+                int numberOfZombiesToSpawn = (_initialTotalNumZombies + (_currWave * _addtionalNumZombiesPerWave)) / _waveZombieSpawners.Count;
+                spawner.SetNumberOfZombiesToSpawn(numberOfZombiesToSpawn);
+            }
+
+            // update spawner so it can randomly choose a player to chase omg slaaay (these probably faster than normal zombies? faster than player?)
+            spawner.Spawn();
+            _numZombiesSpawned += spawner.NumberZombiesToSpawn;
+        }
+
+        // IMPORTANT: These two lines must come after setting the number of zombies to spawn
         _currWave++;
         UpdateWavesIndicator();
-
-        // Make zombies stronger if needed
-
-        // Increase how much spawner will spawn if needed
-        // ^ update spawner so it can randomly choose a player to chase omg slaaay (these probably faster than normal zombies? faster than player?)
-        // ^^ make it so that you can change zombies speed and damage as well
     }
 
 
@@ -102,13 +117,7 @@ public class WaveManager : MonoBehaviour
         _objectiveInstruction.text = "Door is Open!\nEscape!";
         Invoke("DisableObjectiveInstruction", _timeOnScreen);
 
-        Destroy(this);
-    }
-
-
-    private void DisableObjectiveInstruction()
-    {
-        _objectiveInstruction.gameObject.SetActive(false);
+        Destroy(this);  // Does this mess up the top one?
     }
 
 
@@ -116,5 +125,11 @@ public class WaveManager : MonoBehaviour
     {
         _wavesIndicator.gameObject.SetActive(true);
         _wavesIndicator.text = string.Format("{0} / {1} WAVES", _currWave, _totalNumWaves);
+    }
+
+
+    private void DisableObjectiveInstruction()
+    {
+        _objectiveInstruction.gameObject.SetActive(false);
     }
 }

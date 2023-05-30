@@ -8,10 +8,17 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField] private GameObject zombiePrefab;
     [SerializeField] private int numberOfZombiesToSpawn;
     [SerializeField] private float spawnRadius;
+    [SerializeField] private bool staggerSpawn;
+
+    public int NumberZombiesToSpawn { get { return numberOfZombiesToSpawn; } private set { } }
+
 
     void Start()
     {
-        Spawn();
+        if (!staggerSpawn)
+        {
+            Spawn();
+        }
     }
 
 
@@ -29,5 +36,11 @@ public class ZombieSpawner : MonoBehaviour
 
             GameObject gameObject = PhotonNetwork.Instantiate(name, randZombiePos, randZombieRotation);
         }
+    }
+
+
+    public void SetNumberOfZombiesToSpawn(int amount)
+    {
+        numberOfZombiesToSpawn = amount;
     }
 }

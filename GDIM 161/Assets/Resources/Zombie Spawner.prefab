@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8922597683776901877
 Transform:
   m_ObjectHideFlags: 0
@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 6065291058300853016, guid: 8b0a2d95074cc8f4ea390e225948af19,
     type: 3}
-  numberOfZombiesToSpawn: 0
-  spawnRadius: 0
+  numberOfZombiesToSpawn: 5
+  spawnRadius: 10
+  staggerSpawn: 0

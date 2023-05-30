@@ -13,13 +13,22 @@ public class WaveInitiator : MonoBehaviour
 
     private WaveManager _waveManager;
     private int _numPlayersNeeded;
-    Dictionary<string, GameObject> _playersInZone;
+    List<string> _playersInZone;
 
     void Start()
     {
         _waveManager = _waveManagerPrefab.GetComponent<WaveManager>();
+        _playersInZone = new List<string>();
+
+        Invoke("GetNumberPlayersNeeded", 1f);
+    }
+
+
+    // I'm using this function with Invoke because if I try to get the number of players in the room in Start, then
+    // it will be zero by default. If anyone can help me figure out of a better way I'd appreciate it! - Diego
+    private void GetNumberPlayersNeeded()
+    {
         _numPlayersNeeded = _roomManagerPrefab.GetComponent<RoomManager>().numberPlayers;
-        _playersInZone =  new Dictionary<string, GameObject>();
     }
 
 
@@ -35,38 +44,6 @@ public class WaveInitiator : MonoBehaviour
             _allPlayersInZoneReminder.gameObject.SetActive(false);
         }
 
-        foreach (GameObject player in _playersInZone.Values)
-        {
-            foreach (Transform tr in player.transform)
-            {
-                if (tr.tag == "MainCamera")
-                {
-                    Camera cam = tr.GetComponent<Camera>();
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, _minDistanceToInteract));
-                    {
-                        if (hit.collider.gameObject.tag == "WaveInitiator" && Input.GetKeyDown(KeyCode.F))
-                        {
-                            if (IsAllPlayersInZone())
-                            {
-                                _objectiveInstructions.gameObject.SetActive(false);
-                                _allPlayersInZoneReminder.gameObject.SetActive(false);
-
-                                _waveManager.SetUp();
-
-                                Destroy(this);
-                            }
-                            else
-                            {
-                                _allPlayersInZoneReminder.gameObject.SetActive(true);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        /*
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -74,25 +51,21 @@ public class WaveInitiator : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "WaveInitiator" && Input.GetKeyDown(KeyCode.F))
             {
-                if (hit.collider.gameObject.tag == "WaveInitiator" && Input.GetKeyDown(KeyCode.F))
+                if (IsAllPlayersInZone())
                 {
-                    if (IsAllPlayersInZone())
-                    {
-                        _objectiveInstructions.gameObject.SetActive(false);
-                        _allPlayersInZoneReminder.gameObject.SetActive(false);
+                    _objectiveInstructions.gameObject.SetActive(false);
+                    _allPlayersInZoneReminder.gameObject.SetActive(false);
 
-                        _waveManager.SetUp();
+                    _waveManager.SetUp();
 
-                        Destroy(this);
-                    }
-                    else
-                    {
-                        _allPlayersInZoneReminder.gameObject.SetActive(true);
-                    }
+                    Destroy(this);
+                }
+                else
+                {
+                    _allPlayersInZoneReminder.gameObject.SetActive(true);
                 }
             }
         }
-        */
     }
 
 
@@ -102,22 +75,10 @@ public class WaveInitiator : MonoBehaviour
         if (other.tag == "Player")
         {
             GameObject player = other.gameObject;
-            _playersInZone.Add(player.name, player);
-        }
-    }
 
-
-    // Covers edge case where all players are already spawned in the zone.
-    // NOTE: I did not test to see if edge case passes - Diego
-    private void OnTriggerStay(Collider other)
-    {
-        if (!IsAllPlayersInZone() && other.tag == "Player")
-        {
-            GameObject player = other.gameObject;
-
-            if (!_playersInZone.ContainsKey(player.name))
+            if (!_playersInZone.Contains(player.name))
             {
-                _playersInZone.Add(player.name, player);
+                _playersInZone.Add(player.name);
             }
         }
     }
