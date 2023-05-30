@@ -10,6 +10,7 @@ TagManager:
   - SpectatorCamera
   - Zombie
   - Zombie Arm
+  - WaveInitiator
   layers:
   - Default
   - TransparentFX

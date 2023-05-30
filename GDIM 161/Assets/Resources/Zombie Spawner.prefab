@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 6065291058300853016, guid: 8b0a2d95074cc8f4ea390e225948af19,
     type: 3}
-  numberOfZombiesToSpawn: 20
+  numberOfZombiesToSpawn: 0
+  spawnRadius: 0
