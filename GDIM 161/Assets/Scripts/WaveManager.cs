@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    public static WaveManager Instance = null;
     [Header("Game Objects")]
     [SerializeField] private GameObject _entrancePrefab;
     [SerializeField] private float _closedEntranceHeight;
@@ -23,6 +24,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _damageIncreasePerXWave;
     [SerializeField] private float _speedIncreasePerXWave;
     [SerializeField] private int _X;
+    [SerializeField] private int __numZombiesInZone = 0;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI _objectiveInstruction;
@@ -33,6 +35,16 @@ public class WaveManager : MonoBehaviour
     private bool _sendWaves;
     private int _numZombiesInZone;
 
+    void Awake()
+    {
+        if (Instance == null){
+            Instance = this;
+        }
+        else{
+            Debug.Log("THERE CAN ONLY BE ONE WAVE MANAGER");
+            Destroy(this);    
+        }
+    }
 
     void Start()
     {
@@ -106,7 +118,7 @@ public class WaveManager : MonoBehaviour
             }
 
             spawner.Spawn();
-            _numZombiesInZone += spawner.NumberZombiesToSpawn;
+            _numZombiesInZone = spawner.NumberZombiesToSpawn * _waveZombieSpawners.Count;
         }
 
         // IMPORTANT: These two lines must come after setting the number of zombies to spawn - Diego
@@ -132,7 +144,7 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    private void ZombieDied()
+    public void ZombieDied()
     {
         // Check if all the zombies died lol
         // Keep track of number of zombie kills?
@@ -140,6 +152,7 @@ public class WaveManager : MonoBehaviour
         if (_sendWaves)
         {
             _numZombiesInZone--;
+            // print(_numZombiesInZone);
         }
     }
 

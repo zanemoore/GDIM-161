@@ -21,6 +21,8 @@ public class ZombieHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+        Debug.Log(WaveManager.Instance);
+        Died += WaveManager.Instance.ZombieDied;
     }
 
     [PunRPC]
