@@ -56,6 +56,7 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
+        print(_numZombiesInZone); // DEBUG PRINT
         if (_sendWaves && IsCurrWaveFinished())
         {
             if (_currWave < _totalNumWaves)
@@ -68,20 +69,6 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
-
-
-    /*
-    private void OnEnable()
-    {
-        ZombieHealth.Died += ZombieDied;
-    }
-
-
-    private void OnDisable()
-    {
-        ZombieHealth.Died -= ZombieDied;
-    }
-    */
 
 
     public void SetUp()
@@ -151,8 +138,7 @@ public class WaveManager : MonoBehaviour
         // ^ use actions from Die script to here :p?
         if (_sendWaves)
         {
-            _numZombiesInZone--;
-            // print(_numZombiesInZone);
+            _numZombiesInZone = Mathf.Max(0, --_numZombiesInZone);
         }
     }
 
