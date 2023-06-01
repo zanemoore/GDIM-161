@@ -81,7 +81,15 @@ public class WaveInitiator : MonoBehaviour
 
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
-            Camera cam = player.GetComponent<Camera>();
+            Camera cam;
+
+            foreach (Transform childObject in player.transform)
+            {
+                if (childObject.gameObject.tag == "MainCamera")
+                {
+                    cam = childObject.gameObject.GetComponent<Camera>();
+                }
+            }
 
             RaycastHit hit;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
