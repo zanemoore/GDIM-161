@@ -13,18 +13,18 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private GameObject _exitPrefab;
     [SerializeField] private float _openedExitHeight;
 
-    [Header("Spawners")]
+    [Header("Wave Zombie Spawners")]
     [SerializeField] private int _totalNumWaves;
     [SerializeField] private List<GameObject> _waveZombieSpawners;
     [SerializeField] private bool _useDefaultNumZombiesToSpawn;
     [SerializeField] private int _initialTotalNumZombies;
     [SerializeField] private int _addtionalNumZombiesPerWave;
+    [SerializeField] private Transform _waveZombiesDestination;
 
     [Header("Zombies")]
     [SerializeField] private float _damageIncreasePerXWave;
     [SerializeField] private float _speedIncreasePerXWave;
     [SerializeField] private int _X;
-    [SerializeField] private int __numZombiesInZone = 0;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI _objectiveInstruction;
@@ -95,6 +95,8 @@ public class WaveManager : MonoBehaviour
         {
             ZombieSpawner spawner = spawnerPrefab.GetComponent<ZombieSpawner>();
 
+            spawner.SetZombiesDestination(_waveZombiesDestination);
+
             // Make function to make zombies stronger here (speed and damage)
 
             if (!_useDefaultNumZombiesToSpawn)
@@ -130,9 +132,9 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    public void ZombieDied()
+    public void ZombieDied(bool isWaveZombie)
     {
-        if (_sendWaves)
+        if (_sendWaves && isWaveZombie)
         {
             _numZombiesInZone = Mathf.Max(0, --_numZombiesInZone);
         }

@@ -13,7 +13,7 @@ public class ZombieHealth : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] private float despawnTime;
     private bool hit = false;
-    public Action Died; //subscribe functions upon death
+    public Action<bool> Died; //subscribe functions upon death
     public Action<float> Damaged; //subscribe functions upon taking damage
 
     [SerializeField] Animator animator;
@@ -21,7 +21,6 @@ public class ZombieHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        Debug.Log(WaveManager.Instance);
         Died += WaveManager.Instance.ZombieDied;
     }
 
@@ -64,7 +63,7 @@ public class ZombieHealth : MonoBehaviour
         yield return new WaitForSeconds(despawnTime);
         if (GetComponent<PhotonView>().IsMine == true)
         {
-            Died();
+            Died(this.gameObject.name == "Wave Zombie Capsule(Clone)");
             PhotonNetwork.Destroy(gameObject);
         }
     }

@@ -33,6 +33,8 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     private bool isAttacking;
     private float attackTime;
     private ZombieSFXScript sfx;
+    private Vector3 _destination;
+    private bool _isSetDestination;
 
     void Start()
     {
@@ -43,6 +45,12 @@ public class ZombieAI : MonoBehaviourPunCallbacks
         isAwareOfPlayer = false;
         isAttacking = false;
         playerPosition = Vector3.zero;
+
+        if (_isSetDestination == false)
+        {
+            _destination = Vector3.zero;
+            _isSetDestination = false;
+        }
 
         foreach (GameObject z in zombieColliders)
         {
@@ -64,7 +72,14 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
         playerTransform = GameObject.FindGameObjectsWithTag("Player").Select(go => go.transform).ToList();
 
-        if ((isAwareOfPlayer == true) && (isAttacking == false))
+        if (_isSetDestination)
+        {
+            agent.SetDestination(_destination);
+            transform.LookAt(_destination);
+            Move(moveSpeed);
+            animator.SetBool("Walking", true);
+        }
+        else if ((isAwareOfPlayer == true) && (isAttacking == false))
         {
             Chase();  // If the zombie is aware of the player, it will chase them
             animator.SetBool("Walking", true);
@@ -124,6 +139,7 @@ public class ZombieAI : MonoBehaviourPunCallbacks
                 if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, wallLayer))
                 {
                     isAwareOfPlayer = true;
+                    _isSetDestination = false;
 
                     if (distanceToPlayer <= attackDistance)
                     {
@@ -220,6 +236,13 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     {
         agent.isStopped = false;
         agent.speed = speed;
+    }
+
+
+    public void SetDestination(Vector3 destination)
+    {
+        _isSetDestination = true;
+        _destination = destination;
     }
 
     /*
