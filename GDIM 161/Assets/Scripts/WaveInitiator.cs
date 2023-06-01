@@ -18,17 +18,6 @@ public class WaveInitiator : MonoBehaviour
     {
         _waveManager = _waveManagerPrefab.GetComponent<WaveManager>();
         _playersInZone = new List<string>();
-
-        Invoke("GetNumberPlayersNeeded", 10f);  // Waiting on this just cause it takes time for people to load into the game
-    }
-
-
-    // I'm using this function with Invoke because if I try to get the number of players in the room in Start, then
-    // it will be zero by default. If anyone can help me figure out of a better way I'd appreciate it! - Diego
-    private void GetNumberPlayersNeeded()
-    {
-        _numPlayersNeeded = GameObject.FindGameObjectsWithTag("Player").Length;
-        print(string.Format("GetNumberPlayersNeed: {0}", _numPlayersNeeded));
     }
 
 
@@ -96,7 +85,7 @@ public class WaveInitiator : MonoBehaviour
 
     private bool IsAllPlayersInZone()
     {
-        print(string.Format("IsAllPlayersInZone: {0} {1}", _playersInZone.Count, _numPlayersNeeded == _playersInZone.Count));
-        return _numPlayersNeeded == _playersInZone.Count;
+        print(string.Format("IsAllPlayersInZone: {0} {1}", _playersInZone.Count, GameObject.FindGameObjectsWithTag("Player").Length == _playersInZone.Count));
+        return GameObject.FindGameObjectsWithTag("Player").Length == _playersInZone.Count;
     }
 }
