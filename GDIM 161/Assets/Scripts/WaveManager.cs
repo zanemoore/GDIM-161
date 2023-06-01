@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _openedExitHeight;
 
     [Header("Wave Zombie Spawners")]
+    [SerializeField] private float _totalWaveTime;
     [SerializeField] private int _totalNumWaves;
     [SerializeField] private List<GameObject> _waveZombieSpawners;
     [SerializeField] private bool _useDefaultNumZombiesToSpawn;
