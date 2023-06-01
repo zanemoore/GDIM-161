@@ -81,7 +81,7 @@ public class WaveInitiator : MonoBehaviour
 
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
-            Camera cam;
+            Camera cam = null;
 
             foreach (Transform childObject in player.transform)
             {
