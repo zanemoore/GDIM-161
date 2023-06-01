@@ -85,7 +85,7 @@ public class PlayerRevive : MonoBehaviour
                             keyHeld = true;
                             reviveDone = true;
                             reviving = false;
-                            KeyHeld();
+                            //KeyHeld();
                         }
                     }
 
