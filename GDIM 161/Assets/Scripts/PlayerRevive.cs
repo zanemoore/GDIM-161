@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -20,8 +21,12 @@ public class PlayerRevive : MonoBehaviour
     [SerializeField] private GameObject progressBar;
     [SerializeField] private Slider reviveProgressBar;
 
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private ProjectileLauncher projectileLauncher;
+    [SerializeField] private GameObject spectatorCamera;
+    [SerializeField] private GameObject playerCamera;
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PhotonView playerView;
+    //[SerializeField] private PlayerMovement playerMovement;
+    //[SerializeField] private ProjectileLauncher projectileLauncher;
 
     private int deathCounter = 1;
     private float keyHeldStartTime = 0f;
@@ -30,15 +35,13 @@ public class PlayerRevive : MonoBehaviour
     private float reviveProgressAdd;
     private bool keyHeld = false;
     private bool reviving;
-    public bool playerRevived;
+    public bool playerRevived = false;
     public bool inRange { get; private set; }
     public static bool reviveDone;
 
     void Start()
     {
         initialReviveTime = additionalReviveTime * deathCounter;
-
-        playerRevived = false;
         reviveProgressValue = 0f;
 
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -67,7 +70,6 @@ public class PlayerRevive : MonoBehaviour
                     // adds time to the timer while the key is held down
                     if (Input.GetKey(reviveKey) && keyHeld == false)
                     {
-                        Debug.Log("HOLDING");
                         // revive progress bar
                         reviveProgressAdd = 100 / initialReviveTime;
                         reviveProgressValue += reviveProgressAdd * Time.deltaTime;
@@ -121,10 +123,19 @@ public class PlayerRevive : MonoBehaviour
 
         // resets revive timer
         keyHeldTimer = 0f;
+        reviving = false;
         reviveProgressValue = 0;
         keyHeld = false;
 
         playerRevived = true;
+        if (!playerView.IsMine)
+        {
+            spectatorCamera.SetActive(false);
+            playerCamera.SetActive(true);
+            playerView.RPC("EnablePlayer", RpcTarget.AllBuffered);
+            playerRevived = false;
+            playerHealth.health = 100;
+        }
     }
 
     public IEnumerator RangeCheck()
