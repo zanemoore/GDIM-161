@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
     private Image image;
     public int health;
+    public bool isAlive;
 
     public CharacterAudio characterAudio;
     public GameObject spectatorCamera;
@@ -49,8 +50,13 @@ public class PlayerHealth : MonoBehaviour
             {
                 characterAudio.playDeath();
                 spectatorCamera.SetActive(true);
+                isAlive = false;
                 //PhotonNetwork.Destroy(gameObject);
             }
+        }
+        else
+        {
+            isAlive = true;
         }
     }
 

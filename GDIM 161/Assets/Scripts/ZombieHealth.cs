@@ -21,7 +21,11 @@ public class ZombieHealth : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
-        Died += WaveManager.Instance.ZombieDied;
+
+        if (Died != null)
+        {
+            Died += WaveManager.Instance.ZombieDied;
+        }
     }
 
     [PunRPC]
@@ -63,7 +67,11 @@ public class ZombieHealth : MonoBehaviour
         yield return new WaitForSeconds(despawnTime);
         if (GetComponent<PhotonView>().IsMine == true)
         {
-            Died(this.gameObject.name == "Wave Zombie Capsule(Clone)");
+            if (Died != null)
+            {
+                Died(this.gameObject.name == "Wave Zombie Capsule(Clone)");
+            }
+
             PhotonNetwork.Destroy(gameObject);
         }
     }

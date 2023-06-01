@@ -15,6 +15,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public int numberPlayers;
     GameObject localPlayer;
 
+    private void Awake()
+    {
+        for (int i = 0; i < zombieSpawner.Length; i++)
+        {
+            zombieSpawner[i].SetActive(true);
+        }
+    }
+
     private void Start()
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties["characterName"] == null)
@@ -53,11 +61,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[3].position, spawnPoints[3].rotation, 0);
         }
         */
-
-        for (int i = 0; i < zombieSpawner.Length; i++)
-        {
-            zombieSpawner[i].SetActive(true);
-        }
     }
 
     void Update()

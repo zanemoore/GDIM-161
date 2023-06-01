@@ -64,7 +64,7 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (base.photonView.IsMine)
+        if (photonView.IsMine)
         {
             //Checks if Zombie can see player
             ZombieView();

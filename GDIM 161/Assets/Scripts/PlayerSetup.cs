@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,21 @@ public class PlayerSetup : MonoBehaviour
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject playerCanvas;
 
+    [Header("Spectator Components")]
+    [SerializeField] private GameObject spectatorCanvas;
+    [SerializeField] private GameObject spectatorCamera;
+
+    [Header("Player Components")]
+    [SerializeField] private GameObject playerReticle;
+    [SerializeField] private GameObject playerHealthbar;
+    [SerializeField] private GameObject playerReviveObject;
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private CapsuleCollider capsuleCollider;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerRevive playerRevive;
+    [SerializeField] private CharacterAudio characterAudio;
+
     public void IsLocalPlayer()
     {
         playerMovement.enabled = true;
@@ -17,5 +33,39 @@ public class PlayerSetup : MonoBehaviour
         playerController.enabled = true;
         playerCamera.SetActive(true);
         playerCanvas.SetActive(true);
+    }
+
+    [PunRPC]
+    public void DisablePlayer()
+    {
+        playerReticle.SetActive(false);
+        playerHealthbar.SetActive(false);
+        meshRenderer.enabled = false;
+        capsuleCollider.enabled = false;
+        characterController.enabled = false;
+        playerHealth.enabled = false;
+        playerMovement.enabled = false;
+        projectileLauncher.enabled = false;
+        characterAudio.enabled = false;
+
+        spectatorCanvas.SetActive(true);
+        playerReviveObject.SetActive(true);
+    }
+
+    [PunRPC]
+    public void EnablePlayer()
+    {
+        playerReticle.SetActive(true);
+        playerHealthbar.SetActive(true);
+        meshRenderer.enabled = true;
+        capsuleCollider.enabled = true;
+        characterController.enabled = true;
+        playerHealth.enabled = true;
+        playerMovement.enabled = true;
+        projectileLauncher.enabled = true;
+        characterAudio.enabled = true;
+
+        spectatorCanvas.SetActive(false);
+        playerReviveObject.SetActive(false);
     }
 }

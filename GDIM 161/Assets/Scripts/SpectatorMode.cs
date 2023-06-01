@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Photon.Pun;
 
 public class SpectatorMode : MonoBehaviour
 {
@@ -25,45 +26,57 @@ public class SpectatorMode : MonoBehaviour
 
     [Header("Spectator Components")]
     [SerializeField] private GameObject spectatorCanvas;
+    [SerializeField] private GameObject spectatorCamera;
 
     [Header("Player Components")]
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject playerReticle;
     [SerializeField] private GameObject playerHealthbar;
+    [SerializeField] private GameObject playerReviveObject;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private PlayerRevive playerRevive;
     [SerializeField] private ProjectileLauncher projectileLauncher;
     [SerializeField] private CharacterAudio characterAudio;
+    [SerializeField] private PhotonView playerView;
 
     private Vector2 mouseAbsolute;
     private Vector2 smoothMouse;
     private Vector2 targetDirection;
     private Vector2 mouseDelta;
     private float currentSpeed;
+    private bool off;
 
     void Start()
     {
-        playerCamera.SetActive(false);
-        playerReticle.SetActive(false);
-        playerHealthbar.SetActive(false);
-        meshRenderer.enabled = false;
-        capsuleCollider.enabled = false;
-        characterController.enabled = false;
-        playerHealth.enabled = false;
-        playerMovement.enabled = false;
-        projectileLauncher.enabled = false;
-        characterAudio.enabled = false;
+        if (playerView.IsMine)
+        {
+            playerCamera.SetActive(false);
+        }
 
-        spectatorCanvas.SetActive(true);
+        playerView.RPC("DisablePlayer", RpcTarget.AllBuffered);
 
         targetDirection = transform.localRotation.eulerAngles;
     }
 
     void Update()
     {
+        if (playerRevive.playerRevived == true)
+        {
+            if (playerView.IsMine)
+            {
+                spectatorCamera.SetActive(false);
+                playerCamera.SetActive(true);
+                playerView.RPC("EnablePlayer", RpcTarget.AllBuffered);
+            }
+
+            playerHealth.health = 100;
+            playerRevive.playerRevived = false;
+        }
+
         Movement();
         Rotation();
     }
