@@ -55,7 +55,6 @@ public class ZombieHealth : MonoBehaviour
         if (currentHealth <= 0) {
             animator.SetBool("Death", true);
             StartCoroutine("Despawn");
-            Died(); // Hope I'm using this right, trying to connect it to WaveManager lol - Diego
         }
         return currentHealth;
     }
@@ -65,6 +64,7 @@ public class ZombieHealth : MonoBehaviour
         yield return new WaitForSeconds(despawnTime);
         if (GetComponent<PhotonView>().IsMine == true)
         {
+            Died();
             PhotonNetwork.Destroy(gameObject);
         }
     }
