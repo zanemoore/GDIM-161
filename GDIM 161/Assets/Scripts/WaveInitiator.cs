@@ -38,20 +38,27 @@ public class WaveInitiator : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, _minDistanceToInteract))
         {
-            if (hit.collider.gameObject.tag == "WaveInitiator" && Input.GetKeyDown(KeyCode.F))
+            if (hit.collider.gameObject.tag == "WaveInitiator")// && Input.GetKeyDown(KeyCode.F))
             {
-                if (IsAllPlayersInZone())
+                foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
                 {
-                    _objectiveInstructions.gameObject.SetActive(false);
-                    _allPlayersInZoneReminder.gameObject.SetActive(false);
+                    Debug.Log("Here");
+                    if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        if (IsAllPlayersInZone())
+                        {
+                            _objectiveInstructions.gameObject.SetActive(false);
+                            _allPlayersInZoneReminder.gameObject.SetActive(false);
 
-                    _waveManager.SetUp();
+                            _waveManager.SetUp();
 
-                    Destroy(this);
-                }
-                else
-                {
-                    _allPlayersInZoneReminder.gameObject.SetActive(true);
+                            Destroy(this);
+                        }
+                        else
+                        {
+                            _allPlayersInZoneReminder.gameObject.SetActive(true);
+                        }
+                    }
                 }
             }
         }
