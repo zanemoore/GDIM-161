@@ -65,7 +65,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        CheckPlayers();
+        Invoke("CheckPlayers", 5f);
     }
 
     void CheckPlayers()
