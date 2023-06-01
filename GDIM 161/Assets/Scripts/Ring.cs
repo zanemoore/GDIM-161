@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Chat;
+using UnityEngine.UI;
 
 public class Ring : MonoBehaviourPunCallbacks
 {
@@ -15,6 +16,7 @@ public class Ring : MonoBehaviourPunCallbacks
     public AudioClip impact1, impact2, impact3;
     private AudioClip impactToUse;
     private Rigidbody rb;
+    [SerializeField] private RawImage hitMarker;
 
     private void Awake()
     {
@@ -35,16 +37,31 @@ public class Ring : MonoBehaviourPunCallbacks
                 impactToUse = impact3;
                 break;
         }
+        hitMarker = GameObject.FindWithTag("JenHitMarker").GetComponentInChildren<RawImage>();
+        hitMarker.enabled = false;
     }
 
 
 
+
+    private void FlashHitMarker()
+    {
+        hitMarker.enabled = true;
+       // hit = true;
+        Invoke("ResetHitMarker", 0.2f);
+    }
+    private void ResetHitMarker()
+    {
+        hitMarker.enabled = false;
+       // hit = false;
+    }
 
     public void Hit(GameObject zombie)
     {
         Debug.Log(bouncesLeft);
         if (alreadyCollided.Contains(zombie)){ return; }
         newImpact();
+        FlashHitMarker();
         if (true) 
         {
             ZombieHealth healthscript = zombie.GetComponentInParent<ZombieHealth>();
