@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WaveInitiator : MonoBehaviour
 {
-    [SerializeField] private GameObject _roomManagerPrefab;
     [SerializeField] private GameObject _waveManagerPrefab;
     [SerializeField] private float _minDistanceToInteract;
     [SerializeField] private TextMeshProUGUI _objectiveInstructions;
@@ -20,7 +19,7 @@ public class WaveInitiator : MonoBehaviour
         _waveManager = _waveManagerPrefab.GetComponent<WaveManager>();
         _playersInZone = new List<string>();
 
-        Invoke("GetNumberPlayersNeeded", 1f);
+        Invoke("GetNumberPlayersNeeded", 5f);  // Waiting on this just cause it takes time for people to load into the game
     }
 
 
@@ -28,7 +27,8 @@ public class WaveInitiator : MonoBehaviour
     // it will be zero by default. If anyone can help me figure out of a better way I'd appreciate it! - Diego
     private void GetNumberPlayersNeeded()
     {
-        _numPlayersNeeded = _roomManagerPrefab.GetComponent<RoomManager>().numberPlayers;
+        _numPlayersNeeded = GameObject.FindGameObjectsWithTag("Player").Length;
+        print(_numPlayersNeeded);
     }
 
 
@@ -96,6 +96,7 @@ public class WaveInitiator : MonoBehaviour
 
     private bool IsAllPlayersInZone()
     {
+        print(_playersInZone.Count);
         return _numPlayersNeeded == _playersInZone.Count;
     }
 }
