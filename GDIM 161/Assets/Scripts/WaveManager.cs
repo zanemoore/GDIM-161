@@ -107,6 +107,7 @@ public class WaveManager : MonoBehaviour
 
             spawner.Spawn();
             _numZombiesInZone = spawner.NumberZombiesToSpawn * _waveZombieSpawners.Count;
+            print(string.Format("{0} zombs in zone")); ///////////
         }
 
         // IMPORTANT: These two lines must come after setting the number of zombies to spawn - Diego
@@ -134,6 +135,7 @@ public class WaveManager : MonoBehaviour
 
     public void ZombieDied(bool isWaveZombie)
     {
+        print(string.Format("{0} zombies in wave after one considered died", _numZombiesInZone)); ///////////
         if (_sendWaves && isWaveZombie)
         {
             _numZombiesInZone = Mathf.Max(0, --_numZombiesInZone);
