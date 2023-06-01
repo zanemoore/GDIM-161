@@ -35,6 +35,7 @@ public class WaveManager : MonoBehaviour
     private int _currWave;
     private bool _sendWaves;
     private int _numZombiesInZone;
+    private float _startTime;
 
     void Awake()
     {
@@ -54,12 +55,17 @@ public class WaveManager : MonoBehaviour
         _currWave = 0;
         _sendWaves = false;
         _numZombiesInZone = 0;
+        _startTime = Time.time;
     }
 
 
     void Update()
     {
-        if (_sendWaves && IsCurrWaveFinished())
+        if (Time.time - _startTime > _totalWaveTime)
+        {
+            CleanUp();
+        }
+        else if (_sendWaves && IsCurrWaveFinished())
         {
             if (_currWave < _totalNumWaves)
             {
