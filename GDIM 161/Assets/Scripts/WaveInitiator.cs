@@ -19,7 +19,7 @@ public class WaveInitiator : MonoBehaviour
         _waveManager = _waveManagerPrefab.GetComponent<WaveManager>();
         _playersInZone = new List<string>();
 
-        Invoke("GetNumberPlayersNeeded", 5f);  // Waiting on this just cause it takes time for people to load into the game
+        Invoke("GetNumberPlayersNeeded", 10f);  // Waiting on this just cause it takes time for people to load into the game
     }
 
 
