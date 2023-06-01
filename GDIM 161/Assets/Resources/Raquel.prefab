@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9122013885508143856}
   m_Layer: 2
   m_Name: Spectator Camera
-  m_TagString: MainCamera
+  m_TagString: SpectatorCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3403,7 +3403,7 @@ GameObject:
   - component: {fileID: 4402944965303301589}
   m_Layer: 6
   m_Name: Raquel
-  m_TagString: SpectatorCamera
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4252,14 +4252,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
         type: 3}
+      propertyPath: playerView
+      value: 
+      objectReference: {fileID: 8568594455046401692}
+    - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
+        type: 3}
       propertyPath: progressBar
       value: 
       objectReference: {fileID: 8620768373504869235}
     - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
         type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 8568594454322209351}
+    - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
+        type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 1422217567262355493}
+    - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
+        type: 3}
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 8568594455046401703}
+    - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
+        type: 3}
+      propertyPath: spectatorCamera
+      value: 
+      objectReference: {fileID: 150567949461302261}
     - target: {fileID: 5005854756636479082, guid: dda932159c2e3344bb9dbe5807e5b83a,
         type: 3}
       propertyPath: reviveProgressBar
@@ -4274,6 +4294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063064672084598779, guid: dda932159c2e3344bb9dbe5807e5b83a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 5063064672084598779, guid: dda932159c2e3344bb9dbe5807e5b83a,
         type: 3}

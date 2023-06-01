@@ -64,19 +64,6 @@ public class SpectatorMode : MonoBehaviour
 
     void Update()
     {
-        if (playerRevive.playerRevived == true)
-        {
-            if (playerView.IsMine)
-            {
-                spectatorCamera.SetActive(false);
-                playerCamera.SetActive(true);
-                playerView.RPC("EnablePlayer", RpcTarget.AllBuffered);
-            }
-
-            playerHealth.health = 100;
-            playerRevive.playerRevived = false;
-        }
-
         Movement();
         Rotation();
     }
