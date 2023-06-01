@@ -77,9 +77,28 @@ public class WaveManager : MonoBehaviour
         // Might be nice to make it smooth in the future - Diego
         _entrancePrefab.transform.position = new Vector3(_entrancePrefab.transform.position.x, _closedEntranceHeight, _entrancePrefab.transform.position.z);
 
-        _objectiveInstruction.gameObject.SetActive(true);
-        _objectiveInstruction.text = "Survive Until the Gate Opens";
-        Invoke("DisableObjectiveInstruction", _timeOnScreen);
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            foreach (Transform child in player.transform)
+            {
+                if (child.gameObject.name == "Player Canvas")
+                {
+                    GameObject canvas = child.gameObject;
+
+                    foreach (Transform canvasChild in canvas.transform)
+                    {
+                        if (canvasChild.gameObject.name == "WaveManagerObjectiveInstruction1")
+                        {
+                            canvasChild.gameObject.SetActive(true);
+                            Invoke("DisableObjectiveInstruction", _timeOnScreen);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // _objectiveInstruction.text = "Survive Until the Gate Opens";
     }
 
 
@@ -125,11 +144,30 @@ public class WaveManager : MonoBehaviour
 
         _wavesIndicator.gameObject.SetActive(false);
 
-        _objectiveInstruction.gameObject.SetActive(true);
-        _objectiveInstruction.text = "Door is Open!\nEscape!";
-        Invoke("DisableObjectiveInstruction", _timeOnScreen);
 
-        Destroy(this, _timeOnScreen);
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            foreach (Transform child in player.transform)
+            {
+                if (child.gameObject.name == "Player Canvas")
+                {
+                    GameObject canvas = child.gameObject;
+
+                    foreach (Transform canvasChild in canvas.transform)
+                    {
+                        if (canvasChild.gameObject.name == "WaveManagerObjectiveInstruction2")
+                        {
+                            canvasChild.gameObject.SetActive(true);
+                            Invoke("DisableObjectiveInstruction", _timeOnScreen);
+                            Destroy(this, _timeOnScreen);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // _objectiveInstruction.text = "Door is Open!\nEscape!";
     }
 
 
@@ -145,13 +183,53 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateWavesIndicator()
     {
-        _wavesIndicator.gameObject.SetActive(true);
-        _wavesIndicator.text = string.Format("{0} / {1} WAVES", _currWave, _totalNumWaves);
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            foreach (Transform child in player.transform)
+            {
+                if (child.gameObject.name == "Player Canvas")
+                {
+                    GameObject canvas = child.gameObject;
+
+                    foreach (Transform canvasChild in canvas.transform)
+                    {
+                        if (canvasChild.gameObject.name == "WavesIndicator")
+                        {
+                            canvasChild.gameObject.SetActive(true);
+                            canvasChild.gameObject.GetComponent<TextMeshProUGUI>().text = string.Format("{0} / {1} WAVES", _currWave, _totalNumWaves);
+                        }
+                    }
+
+                }
+            }
+        }
     }
 
 
     private void DisableObjectiveInstruction()
     {
-        _objectiveInstruction.gameObject.SetActive(false);
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            foreach (Transform child in player.transform)
+            {
+                if (child.gameObject.name == "Player Canvas")
+                {
+                    GameObject canvas = child.gameObject;
+
+                    foreach (Transform canvasChild in canvas.transform)
+                    {
+                        if (canvasChild.gameObject.name == "WaveManagerObjectiveInstructions1")
+                        {
+                            canvasChild.gameObject.SetActive(false);
+                        }
+                        else if (canvasChild.gameObject.name == "WaveManagerObjectiveInstructions2")
+                        {
+                            canvasChild.gameObject.SetActive(false);
+                        }
+                    }
+
+                }
+            }
+        }
     }
 }
