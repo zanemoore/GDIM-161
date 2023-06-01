@@ -85,7 +85,6 @@ public class WaveInitiator : MonoBehaviour
 
     private bool IsAllPlayersInZone()
     {
-        print(string.Format("IsAllPlayersInZone: {0} {1}", _playersInZone.Count, GameObject.FindGameObjectsWithTag("Player").Length == _playersInZone.Count));
         return GameObject.FindGameObjectsWithTag("Player").Length == _playersInZone.Count;
     }
 }

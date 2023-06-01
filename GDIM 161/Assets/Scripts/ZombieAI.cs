@@ -49,7 +49,6 @@ public class ZombieAI : MonoBehaviourPunCallbacks
         if (_isSetDestination == false)
         {
             _destination = Vector3.zero;
-            _isSetDestination = false;
         }
 
         foreach (GameObject z in zombieColliders)
