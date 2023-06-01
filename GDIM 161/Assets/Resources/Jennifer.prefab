@@ -1098,8 +1098,6 @@ MonoBehaviour:
   - {fileID: 1020820001598262324}
   health: {fileID: 9096710826418509760}
   totalHealth: 76
-  players: []
-  friendHealth: 
 --- !u!1 &2679198975959655704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1535,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 5}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6166449730905816704
 CanvasRenderer:
@@ -2148,7 +2146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.58750004, y: 0.88444453}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -5.2989044, y: -3}
+  m_AnchoredPosition: {x: -5.298889, y: -3}
   m_SizeDelta: {x: 319.08575, y: 46.79267}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4714766829363276077
@@ -2509,7 +2507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.72625005, y: 0.8711112}
   m_AnchorMax: {x: 0.97749996, y: 0.98222226}
-  m_AnchoredPosition: {x: 6.3000183, y: 4}
+  m_AnchoredPosition: {x: 6.299988, y: 4}
   m_SizeDelta: {x: 199.99994, y: 49.99997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7398292959290148097
@@ -2670,8 +2668,6 @@ MonoBehaviour:
   - {fileID: 1452516464405585333}
   health: {fileID: 4917110829796551826}
   totalHealth: 76
-  players: []
-  friendHealth: 
 --- !u!1 &5734735382022512673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,8 +2875,6 @@ MonoBehaviour:
   - {fileID: 1591761182624647316}
   health: {fileID: 8448741467502675035}
   totalHealth: 76
-  players: []
-  friendHealth: 
 --- !u!1 &6536303239387551775
 GameObject:
   m_ObjectHideFlags: 0
