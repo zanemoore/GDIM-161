@@ -4220,6 +4220,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9021776497357750529, guid: 830784f823a3adf4d93d79f871fc8851,
+        type: 3}
+      propertyPath: m_TagString
+      value: RHitMarker
+      objectReference: {fileID: 0}
     - target: {fileID: 9021776497357750531, guid: 830784f823a3adf4d93d79f871fc8851,
         type: 3}
       propertyPath: m_Enabled

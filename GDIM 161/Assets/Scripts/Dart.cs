@@ -22,7 +22,7 @@ public class Dart : MonoBehaviourPunCallbacks
     {
         impactToUse = impact1;
         //raquel = GameObject.Find("Raquel");
-        hitMarker = GameObject.FindWithTag("HitMarker").GetComponentInChildren<RawImage>();
+        hitMarker = GameObject.FindWithTag("RHitMarker").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
     }
 
