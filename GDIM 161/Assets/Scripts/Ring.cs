@@ -44,13 +44,13 @@ public class Ring : MonoBehaviourPunCallbacks
     private void FlashHitMarker()
     {
         hitMarker.enabled = true;
-        hit = true;
+       // hit = true;
         Invoke("ResetHitMarker", 0.2f);
     }
     private void ResetHitMarker()
     {
         hitMarker.enabled = false;
-        hit = false;
+     //   hit = false;
     }
 
 
