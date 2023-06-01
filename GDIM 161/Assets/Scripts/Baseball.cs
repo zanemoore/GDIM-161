@@ -16,6 +16,7 @@ public class Baseball : MonoBehaviourPunCallbacks
     public AudioClip impact1, impact2, impact3;
     private AudioClip impactToUse;
     [SerializeField] private RawImage hitMarker;
+    private GameObject matt;
 
     private void Start()
     {
@@ -31,8 +32,8 @@ public class Baseball : MonoBehaviourPunCallbacks
                 impactToUse = impact3;
                 break;
         }
-
-        hitMarker = GameObject.Find("Player Canvas").GetComponentInChildren<RawImage>();
+        matt = GameObject.Find("Matt");
+        hitMarker = matt.transform.Find("Player Canvas").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
     }
 

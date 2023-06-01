@@ -16,12 +16,13 @@ public class Dart : MonoBehaviourPunCallbacks
     public AudioClip impact1;
     private AudioClip impactToUse;
     [SerializeField] private RawImage hitMarker;
+    private GameObject raquel;
 
     private void Start()
     {
         impactToUse = impact1;
-
-        hitMarker = GameObject.Find("Player Canvas").GetComponentInChildren<RawImage>();
+        raquel = GameObject.Find("Raquel");
+        hitMarker = raquel.transform.Find("Player Canvas").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
     }
 
