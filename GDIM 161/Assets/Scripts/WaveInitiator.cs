@@ -28,7 +28,7 @@ public class WaveInitiator : MonoBehaviour
     private void GetNumberPlayersNeeded()
     {
         _numPlayersNeeded = GameObject.FindGameObjectsWithTag("Player").Length;
-        print(_numPlayersNeeded);
+        print(string.Format("GetNumberPlayersNeed: {0}", _numPlayersNeeded));
     }
 
 
@@ -96,7 +96,7 @@ public class WaveInitiator : MonoBehaviour
 
     private bool IsAllPlayersInZone()
     {
-        print(_playersInZone.Count);
+        print(string.Format("IsAllPlayersInZone: {0} {1}", _playersInZone.Count, _numPlayersNeeded == _playersInZone.Count));
         return _numPlayersNeeded == _playersInZone.Count;
     }
 }
