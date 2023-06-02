@@ -55,7 +55,7 @@ public class WaveManager : MonoBehaviour
         _currWave = 0;
         _sendWaves = false;
         _numZombiesInZone = 0;
-        _startTime = Time.time;
+        
     }
 
 
@@ -82,7 +82,7 @@ public class WaveManager : MonoBehaviour
     public void SetUp()
     {
         _sendWaves = true;
-
+        _startTime = Time.time;
         // Might be nice to make it smooth in the future - Diego
         _entrancePrefab.transform.position = new Vector3(_entrancePrefab.transform.position.x, _closedEntranceHeight, _entrancePrefab.transform.position.z);
 
