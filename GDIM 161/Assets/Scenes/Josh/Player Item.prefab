@@ -1260,8 +1260,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Player Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: da99f277e02358b449f7b4a6431146f4, type: 2}
+  m_sharedMaterial: {fileID: -2527981050205570482, guid: da99f277e02358b449f7b4a6431146f4,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1785,8 +1786,6 @@ MonoBehaviour:
   leftArrowButton: {fileID: 1671564511925508016}
   rightArrowButton: {fileID: 581255357020660390}
   outlineBackground: {fileID: 1103841036381503698}
-  charMenu: {fileID: 8716327951158992445}
-  backButton: {fileID: 9076171748584470650}
   characterName: {fileID: 6704987382159581927}
   characterNames:
   - Matt
@@ -2093,8 +2092,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Matt
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: da99f277e02358b449f7b4a6431146f4, type: 2}
+  m_sharedMaterial: {fileID: -2527981050205570482, guid: da99f277e02358b449f7b4a6431146f4,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
