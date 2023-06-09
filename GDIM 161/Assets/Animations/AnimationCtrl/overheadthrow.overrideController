@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: overheadthrow
+  m_Controller: {fileID: 9100000, guid: e86a40e5e888c8340b5222e15b5a27a2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: acb3b85eece41e3459c60c5778629e08,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: f39f964c42c84024bbcf9a73eeab5d24,
+      type: 3}
