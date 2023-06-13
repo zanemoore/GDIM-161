@@ -11,6 +11,8 @@ TagManager:
   - Zombie
   - Zombie Arm
   - WaveInitiator
+  - JenHitMarker
+  - RHitMarker
   layers:
   - Default
   - TransparentFX
@@ -19,12 +21,12 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
-  - Character
+  - Building
+  - Prop
   - Ground
   - Zombie
-  - 
-  - 
+  - Arrow
+  - Landscape
   - 
   - 
   - 

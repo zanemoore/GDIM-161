@@ -1345,6 +1345,8 @@ MonoBehaviour:
   - {fileID: 1020820001598262324}
   health: {fileID: 9096710826418509760}
   totalHealth: 76
+  players: []
+  friendHealth: 
 --- !u!1 &2679198975959655704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,6 +2344,8 @@ MonoBehaviour:
   - {fileID: 1452516464405585333}
   health: {fileID: 4917110829796551826}
   totalHealth: 76
+  players: []
+  friendHealth: 
 --- !u!1 &5734735382022512673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2653,8 @@ MonoBehaviour:
   - {fileID: 1591761182624647316}
   health: {fileID: 8448741467502675035}
   totalHealth: 76
+  players: []
+  friendHealth: 
 --- !u!1 &6536303239387551775
 GameObject:
   m_ObjectHideFlags: 0
@@ -4539,17 +4545,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampInDegrees: {x: 360, y: 180}
   smoothing: {x: 3, y: 3}
-  boundMinimumX: -70
-  boundMaximumX: 70
+  boundMinimumX: -46.15
+  boundMaximumX: 412.95
   boundMinimumY: 2
-  boundMaximumY: 20
-  boundMinimumZ: -70
-  boundMaximumZ: 70
+  boundMaximumY: 15
+  boundMinimumZ: -197.25
+  boundMaximumZ: 261.55
   sensitivity: 2
-  normalSpeed: 5
+  normalSpeed: 10
   verticalSpeed: 2
-  slowSpeed: 3
-  fastSpeed: 10
+  slowSpeed: 5
+  fastSpeed: 20
   slowKey: 308
   fastKey: 304
   spectatorCanvas: {fileID: 5932052744313048487}
