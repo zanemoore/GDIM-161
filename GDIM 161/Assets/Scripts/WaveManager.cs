@@ -7,6 +7,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance = null;
+
     [Header("Game Objects")]
     [SerializeField] private GameObject _entrancePrefab;
     [SerializeField] private float _closedEntranceHeight;
@@ -21,11 +22,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int _initialTotalNumZombies;
     [SerializeField] private int _addtionalNumZombiesPerWave;
     [SerializeField] private Transform _waveZombiesDestination;
-
-    [Header("Zombies")]
-    [SerializeField] private float _damageIncreasePerXWave;
-    [SerializeField] private float _speedIncreasePerXWave;
-    [SerializeField] private int _X;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI _objectiveInstruction;
@@ -50,6 +46,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+
     void Start()
     {
         _currWave = 0;
@@ -61,19 +58,22 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - _startTime > _totalWaveTime)
+        if (_sendWaves)
         {
-            CleanUp();
-        }
-        else if (_sendWaves && IsCurrWaveFinished())
-        {
-            if (_currWave < _totalNumWaves)
-            {
-                SendNewWave();
-            }
-            else
+            if (Time.time - _startTime > _totalWaveTime)
             {
                 CleanUp();
+            }
+            else if (IsCurrWaveFinished())
+            {
+                if (_currWave < _totalNumWaves)
+                {
+                    SendNewWave();
+                }
+                else
+                {
+                    CleanUp();
+                }
             }
         }
     }
@@ -106,8 +106,6 @@ public class WaveManager : MonoBehaviour
 
             spawner.SetZombiesDestination(_waveZombiesDestination);
 
-            // Make function to make zombies stronger here (speed and damage)
-
             if (!_useDefaultNumZombiesToSpawn)
             {
                 int numberOfZombiesToSpawn = (_initialTotalNumZombies + (_currWave * _addtionalNumZombiesPerWave)) / _waveZombieSpawners.Count;
@@ -115,8 +113,7 @@ public class WaveManager : MonoBehaviour
             }
 
             spawner.Spawn();
-            _numZombiesInZone = spawner.NumberZombiesToSpawn * _waveZombieSpawners.Count;
-            // print(string.Format("{0} zombs in zone")); ///////////
+            _numZombiesInZone += spawner.NumberZombiesToSpawn;
         }
 
         // IMPORTANT: These two lines must come after setting the number of zombies to spawn - Diego
@@ -137,14 +134,11 @@ public class WaveManager : MonoBehaviour
         _objectiveInstruction.gameObject.SetActive(true);
         _objectiveInstruction.text = "Door is Open!\nEscape!";
         Invoke("DisableObjectiveInstruction", _timeOnScreen);
-
-        Destroy(this, _timeOnScreen);
     }
 
 
     public void ZombieDied(bool isWaveZombie)
     {
-        print(string.Format("{0} zombies in wave after one considered died", _numZombiesInZone)); ///////////
         if (_sendWaves && isWaveZombie)
         {
             _numZombiesInZone = Mathf.Max(0, --_numZombiesInZone);
