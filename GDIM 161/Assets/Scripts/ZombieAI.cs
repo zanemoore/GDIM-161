@@ -71,7 +71,7 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
         playerTransform = GameObject.FindGameObjectsWithTag("Player").Select(go => go.transform).ToList();
 
-        if (_isSetDestination)
+        if (_isSetDestination == true)
         {
             agent.SetDestination(_destination);
             transform.LookAt(_destination);

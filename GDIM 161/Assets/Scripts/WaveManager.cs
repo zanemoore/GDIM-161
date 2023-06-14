@@ -139,7 +139,6 @@ public class WaveManager : MonoBehaviour
 
     public void ZombieDied(bool isWaveZombie)
     {
-        print(string.Format("{0} zombies in wave after one considered died", _numZombiesInZone)); ///////////
         if (_sendWaves && isWaveZombie)
         {
             _numZombiesInZone = Mathf.Max(0, --_numZombiesInZone);
