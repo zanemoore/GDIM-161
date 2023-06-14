@@ -12,9 +12,7 @@ GameObject:
   - component: {fileID: 8445669505325800490}
   - component: {fileID: 5967829032750541024}
   - component: {fileID: 1607354277783774802}
-  - component: {fileID: 2062953013}
-  - component: {fileID: 1919396186}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Garden Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,35 +95,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -617253222673820554, guid: 337c03e99456e5c4cb950e3496e42732, type: 3}
---- !u!65 &2062953013
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5319033265723820341}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.240426, y: 2.1266553, z: 0.9696897}
-  m_Center: {x: 0.036774304, y: 1.0466458, z: 0.002635777}
---- !u!208 &1919396186
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5319033265723820341}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 1.1350001, y: 1.0630001, z: 0.485}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0.022000002, y: 1.047, z: 0.003}
-  m_TimeToStationary: 0.5

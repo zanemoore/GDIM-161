@@ -20,6 +20,7 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     [SerializeField] private int attackDamage;
     [SerializeField] private float attackRate;
     [SerializeField] private float attackDistance;
+    [SerializeField] private float attackAngle;
 
     [SerializeField] private List<GameObject> players;
     [SerializeField] private List<Transform> playerTransform;
@@ -211,10 +212,12 @@ public class ZombieAI : MonoBehaviourPunCallbacks
         if (attackTime <= 0)
         {
             attackTime = 1 / attackRate;
-            DamagePlayer();
+            //DamagePlayer();
+            Damage();
         }
     }
 
+    /*
     void DamagePlayer()
     {
         Ray ray = new Ray(transform.position, transform.forward);
@@ -223,10 +226,37 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, viewRadius))
         {
-            if (hit.transform.gameObject.GetComponent<PlayerHealth>() && hit.transform.gameObject.tag != "SpectatorCamera")
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+
+            if (hit.collider.gameObject.GetComponent<PlayerHealth>() && hit.transform.gameObject.tag != "SpectatorCamera")
             {
                 //sfx.attack();
-                hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+                hit.collider.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+            }
+        }
+    }
+    */
+
+    private void Damage()
+    {
+        Collider[] playerInView = Physics.OverlapSphere(transform.position, attackDistance, playerLayer);
+
+        for (int i = 0; i < playerInView.Length; i++)
+        {
+            Transform player = playerInView[i].transform;
+            Vector3 directionToPlayer = (player.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToPlayer) < attackAngle / 2)
+            {
+                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+                if (!Physics.Raycast(transform.position, directionToPlayer, distanceToPlayer, wallLayer))
+                {
+                    if (distanceToPlayer <= attackDistance)
+                    {
+                        player.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, attackDamage);
+                    }
+                }
             }
         }
     }
@@ -248,12 +278,12 @@ public class ZombieAI : MonoBehaviourPunCallbacks
     private void OnDrawGizmos()
     {
         Handles.color = Color.white;
-        Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, 360, viewRadius);
-        Vector3 viewAngle1 = DirectionFromAngle(transform.eulerAngles.y, -viewAngle / 2);
-        Vector3 viewAngle2 = DirectionFromAngle(transform.eulerAngles.y, viewAngle / 2);
+        Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, 360, attackDistance);
+        Vector3 viewAngle1 = DirectionFromAngle(transform.eulerAngles.y, -attackAngle / 2);
+        Vector3 viewAngle2 = DirectionFromAngle(transform.eulerAngles.y, attackAngle / 2);
         Handles.color = Color.yellow;
-        Handles.DrawLine(transform.position, transform.position + viewAngle1 * viewRadius);
-        Handles.DrawLine(transform.position, transform.position + viewAngle2 * viewRadius);
+        Handles.DrawLine(transform.position, transform.position + viewAngle1 * attackDistance);
+        Handles.DrawLine(transform.position, transform.position + viewAngle2 * attackDistance);
     }
 
 

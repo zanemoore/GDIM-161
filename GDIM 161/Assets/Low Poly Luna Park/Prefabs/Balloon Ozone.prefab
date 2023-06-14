@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5459301310855378514}
   - component: {fileID: 7793376728537825944}
   - component: {fileID: 4741225809581713946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Balloon Ozone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +95,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4331190762626659646, guid: fcba8a591c6135643a01cdd3f6f3369d, type: 3}
