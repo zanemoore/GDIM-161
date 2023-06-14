@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Zane/Online Multiplayer.unity
     guid: 7e205e3bdb59fcd43af7c928c8b68430
   - enabled: 0
-    path: Assets/Scenes/Final Build.unity
+    path: Assets/Scenes/Backup.unity
     guid: 518a4d166c3b8e34aac99c768a6025fd
   - enabled: 1
     path: Assets/Scenes/Zane/BETA SCENE.unity

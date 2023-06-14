@@ -7,6 +7,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance = null;
+
     [Header("Game Objects")]
     [SerializeField] private GameObject _entrancePrefab;
     [SerializeField] private float _closedEntranceHeight;
@@ -21,11 +22,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private int _initialTotalNumZombies;
     [SerializeField] private int _addtionalNumZombiesPerWave;
     [SerializeField] private Transform _waveZombiesDestination;
-
-    [Header("Zombies")]
-    [SerializeField] private float _damageIncreasePerXWave;
-    [SerializeField] private float _speedIncreasePerXWave;
-    [SerializeField] private int _X;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI _objectiveInstruction;
@@ -106,8 +102,6 @@ public class WaveManager : MonoBehaviour
 
             spawner.SetZombiesDestination(_waveZombiesDestination);
 
-            // Make function to make zombies stronger here (speed and damage)
-
             if (!_useDefaultNumZombiesToSpawn)
             {
                 int numberOfZombiesToSpawn = (_initialTotalNumZombies + (_currWave * _addtionalNumZombiesPerWave)) / _waveZombieSpawners.Count;
@@ -115,8 +109,7 @@ public class WaveManager : MonoBehaviour
             }
 
             spawner.Spawn();
-            _numZombiesInZone = spawner.NumberZombiesToSpawn * _waveZombieSpawners.Count;
-            // print(string.Format("{0} zombs in zone")); ///////////
+            _numZombiesInZone += spawner.NumberZombiesToSpawn;
         }
 
         // IMPORTANT: These two lines must come after setting the number of zombies to spawn - Diego
