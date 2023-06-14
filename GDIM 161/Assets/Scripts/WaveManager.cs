@@ -46,6 +46,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+
     void Start()
     {
         _currWave = 0;
@@ -57,19 +58,22 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - _startTime > _totalWaveTime)
+        if (_sendWaves)
         {
-            CleanUp();
-        }
-        else if (_sendWaves && IsCurrWaveFinished())
-        {
-            if (_currWave < _totalNumWaves)
-            {
-                SendNewWave();
-            }
-            else
+            if (Time.time - _startTime > _totalWaveTime)
             {
                 CleanUp();
+            }
+            else if (IsCurrWaveFinished())
+            {
+                if (_currWave < _totalNumWaves)
+                {
+                    SendNewWave();
+                }
+                else
+                {
+                    CleanUp();
+                }
             }
         }
     }
@@ -130,8 +134,6 @@ public class WaveManager : MonoBehaviour
         _objectiveInstruction.gameObject.SetActive(true);
         _objectiveInstruction.text = "Door is Open!\nEscape!";
         Invoke("DisableObjectiveInstruction", _timeOnScreen);
-
-        Destroy(this, _timeOnScreen);
     }
 
 
