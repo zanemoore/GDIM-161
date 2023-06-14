@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Zane/BETA SCENE.unity
     guid: b639a44c396a50d4eb141ac15526438a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Backup.unity
     guid: 163067d60aa78fb4aaee6a55fa24e6c5
   m_configObjects:

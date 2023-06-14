@@ -18,12 +18,10 @@ public class PlayerSetup : MonoBehaviour
     [Header("Player Components")]
     [SerializeField] private GameObject playerReticle;
     [SerializeField] private GameObject playerHealthbar;
-    [SerializeField] private GameObject playerReviveObject;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private PlayerRevive playerRevive;
     [SerializeField] private CharacterAudio characterAudio;
 
     public void IsLocalPlayer()
@@ -49,7 +47,6 @@ public class PlayerSetup : MonoBehaviour
         characterAudio.enabled = false;
 
         spectatorCanvas.SetActive(true);
-        playerReviveObject.SetActive(true);
     }
 
     [PunRPC]
@@ -66,6 +63,5 @@ public class PlayerSetup : MonoBehaviour
         characterAudio.enabled = true;
 
         spectatorCanvas.SetActive(false);
-        playerReviveObject.SetActive(false);
     }
 }

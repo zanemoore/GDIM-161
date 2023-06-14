@@ -27,18 +27,18 @@ public class SpectatorMode : MonoBehaviour
     [Header("Spectator Components")]
     [SerializeField] private GameObject spectatorCanvas;
     [SerializeField] private GameObject spectatorCamera;
+    [SerializeField] private GameObject spectatorControls;
+
 
     [Header("Player Components")]
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject playerReticle;
     [SerializeField] private GameObject playerHealthbar;
-    [SerializeField] private GameObject playerReviveObject;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private CapsuleCollider capsuleCollider;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerRevive playerRevive;
     [SerializeField] private ProjectileLauncher projectileLauncher;
     [SerializeField] private CharacterAudio characterAudio;
     [SerializeField] private PhotonView playerView;
@@ -48,10 +48,12 @@ public class SpectatorMode : MonoBehaviour
     private Vector2 targetDirection;
     private Vector2 mouseDelta;
     private float currentSpeed;
-    private bool off;
+    private bool cursorOn;
 
     void Start()
     {
+        cursorOn = false;
+
         if (playerView.IsMine)
         {
             playerCamera.SetActive(false);
@@ -64,8 +66,24 @@ public class SpectatorMode : MonoBehaviour
 
     void Update()
     {
-        Movement();
-        Rotation();
+        if (cursorOn == false)
+        {
+            Movement();
+            Rotation();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab) && cursorOn == false)
+        {
+            cursorOn = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Input.GetKeyDown(KeyCode.Tab) && cursorOn == true)
+        {
+            cursorOn = false;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     void LateUpdate()
@@ -131,5 +149,24 @@ public class SpectatorMode : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(-mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
         transform.localRotation *= Quaternion.AngleAxis(mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
+    }
+
+    public void ControlsPanel()
+    {
+        if (spectatorControls.activeInHierarchy == true)
+        {
+            spectatorControls.SetActive(false);
+        }
+        else
+        {
+            spectatorControls.SetActive(true);
+        }
+    }
+
+    public void ReturnToLobby()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.LoadLevel(1);
     }
 }
