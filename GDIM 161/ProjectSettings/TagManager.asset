@@ -13,6 +13,7 @@ TagManager:
   - WaveInitiator
   - JenHitMarker
   - RHitMarker
+  - JohnHitMarker
   layers:
   - Default
   - TransparentFX

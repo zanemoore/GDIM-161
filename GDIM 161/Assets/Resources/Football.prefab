@@ -192,11 +192,11 @@ GameObject:
   - component: {fileID: 3652794204145341276}
   - component: {fileID: 8612662193758226721}
   - component: {fileID: 7304930246579882475}
-  - component: {fileID: 2936897085907162777}
   - component: {fileID: 8852084662430001051}
   - component: {fileID: 6194851247248240216}
   - component: {fileID: 4091273713547115849}
   - component: {fileID: 5968297748927731012}
+  - component: {fileID: 7823802139693681912}
   m_Layer: 0
   m_Name: Football
   m_TagString: Untagged
@@ -252,25 +252,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &2936897085907162777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4177797105835837926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eabb9ed8f18520499318a4cd78a5790, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  currentHealth: 0
-  src: {fileID: 8852084662430001051}
-  impact1: {fileID: 8300000, guid: 7520c9fd84688204ca03ae96ebe7b8a9, type: 3}
-  impact2: {fileID: 8300000, guid: 137ef0afe3c1fb340a00b1eb13995454, type: 3}
-  impact3: {fileID: 8300000, guid: 4abfb003ab552934b9c75bef54d22326, type: 3}
-  hitMarker: {fileID: 0}
 --- !u!82 &8852084662430001051
 AudioSource:
   m_ObjectHideFlags: 0
@@ -424,6 +405,25 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &7823802139693681912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177797105835837926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac559c96bf3e53479c7a787979b776b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  currentHealth: 0
+  src: {fileID: 8852084662430001051}
+  impact1: {fileID: 8300000, guid: 7520c9fd84688204ca03ae96ebe7b8a9, type: 3}
+  impact2: {fileID: 8300000, guid: 137ef0afe3c1fb340a00b1eb13995454, type: 3}
+  impact3: {fileID: 8300000, guid: 4abfb003ab552934b9c75bef54d22326, type: 3}
+  hitMarker: {fileID: 0}
 --- !u!1 &9072292709611541395
 GameObject:
   m_ObjectHideFlags: 0
