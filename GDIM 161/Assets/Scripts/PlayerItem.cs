@@ -18,6 +18,9 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public string[] characterNames;
     public Image characterIcon;
     public Sprite[] characterIcons;
+    public Sprite[] characterStats;
+    private bool statsShown;
+    public Image statImg;
 
     Player player;
 
@@ -59,6 +62,8 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerProperties["characterIcon"] = (int)playerProperties["characterIcon"] - 1;
         }
+        statImg.overrideSprite = null;
+        statsShown = false;
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
@@ -81,7 +86,23 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         {
             playerProperties["characterIcon"] = (int)playerProperties["characterIcon"] + 1;
         }
+        statImg.overrideSprite = null;
+        statsShown = false;
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+    }
+
+    public void OnClickIcon()
+    {
+        if (!statsShown)
+        {
+            statImg.overrideSprite = characterStats[(int)playerProperties["characterIcon"]];
+            statsShown = true;
+        }
+        else
+        {
+            statImg.overrideSprite = null;
+            statsShown = false;
+        }
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
