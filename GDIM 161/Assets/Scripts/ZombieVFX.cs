@@ -18,7 +18,7 @@ public class ZombieVFX : MonoBehaviour
     public void IndicateDamage(float damage)
     {
         skin.material = damageMaterial;
-        Invoke("ResetSkin", 0.3f);
+        Invoke("ResetSkin", 0.2f);
     }
 
     public void ResetSkin()
