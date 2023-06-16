@@ -199,7 +199,7 @@ AudioSource:
   MinDistance: 3.04
   MaxDistance: 70
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -362,6 +362,7 @@ MonoBehaviour:
   attackDamage: 1
   attackRate: 1
   attackDistance: 2.5
+  attackAngle: 0
   players: []
   playerTransform: []
   animator: {fileID: 4829290966487661373}

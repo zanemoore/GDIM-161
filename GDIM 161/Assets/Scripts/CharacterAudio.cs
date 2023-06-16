@@ -30,7 +30,7 @@ public class CharacterAudio : MonoBehaviour
     public void playDmg()
     {
         newDmg();
-        src.PlayOneShot(dmgToUse, 1.2f);
+        src.PlayOneShot(dmgToUse, 1.5f);
     }
 
     public void playDeath()

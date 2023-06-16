@@ -110,7 +110,7 @@ AudioSource:
   MinDistance: 3.04
   MaxDistance: 70
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -222,6 +222,12 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
+  spectatorLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  zombieLayer:
+    serializedVersion: 2
+    m_Bits: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -229,10 +235,12 @@ MonoBehaviour:
   attackDamage: 0
   attackRate: 0
   attackDistance: 0
+  attackAngle: 0
   players: []
   playerTransform: []
   animator: {fileID: 0}
   lookAt: {fileID: 0}
+  zombieColliders: []
 --- !u!195 &1545329018
 NavMeshAgent:
   m_ObjectHideFlags: 0

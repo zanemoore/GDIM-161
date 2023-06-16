@@ -20,6 +20,7 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     public Sprite[] characterIcons;
     public Sprite[] characterStats;
     private bool statsShown;
+    public GameObject stats;
     public Image statImg;
 
     Player player;
@@ -41,6 +42,13 @@ public class PlayerItem : MonoBehaviourPunCallbacks
         outlineBackground.enabled = true;
         leftArrowButton.SetActive(true);
         rightArrowButton.SetActive(true);
+    }
+
+    public void DisableLocalChanges()
+    {
+        outlineBackground.enabled = false;
+        leftArrowButton.SetActive(false);
+        rightArrowButton.SetActive(false);
     }
 
     public void OnClickLeftArrow()
@@ -95,12 +103,16 @@ public class PlayerItem : MonoBehaviourPunCallbacks
     {
         if (!statsShown)
         {
+            stats.SetActive(true);
             statImg.overrideSprite = characterStats[(int)playerProperties["characterIcon"]];
+            DisableLocalChanges();
             statsShown = true;
         }
         else
         {
             statImg.overrideSprite = null;
+            ApplyLocalChanges();
+            stats.SetActive(false);
             statsShown = false;
         }
     }

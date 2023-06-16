@@ -57,9 +57,9 @@ public class Dart : MonoBehaviourPunCallbacks
                 //currentHealth -= damage;
             }
         }
-        src.volume = 1.5f;
+        src.volume = 1f;
         src.spatialBlend = 1f;
-        src.PlayOneShot(impactToUse);
+        src.PlayOneShot(impactToUse, 2.1f);
         Destroy(this.gameObject, 5f); // hardcoded to destroy after 5 seconds
     }
 
