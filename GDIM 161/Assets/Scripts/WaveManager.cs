@@ -24,9 +24,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform _waveZombiesDestination;
 
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI _objectiveInstruction;
     [SerializeField] private float _timeOnScreen;
-    [SerializeField] private TextMeshProUGUI _wavesIndicator;
+
+    private TextMeshProUGUI _objectiveInstruction;
+    private TextMeshProUGUI _wavesIndicator;
 
     private int _currWave;
     private bool _sendWaves;

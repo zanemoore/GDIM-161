@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,8 +7,9 @@ public class WaveInitiator : MonoBehaviour
 {
     [SerializeField] private GameObject _waveManagerPrefab;
     [SerializeField] private float _minDistanceToInteract;
-    [SerializeField] private TextMeshProUGUI _objectiveInstructions;
-    [SerializeField] private TextMeshProUGUI _allPlayersInZoneReminder;
+
+    private TextMeshProUGUI _objectiveInstructions;
+    private TextMeshProUGUI _allPlayersInZoneReminder;
 
     private WaveManager _waveManager;
     private int _numPlayersNeeded;
