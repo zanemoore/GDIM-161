@@ -15,4 +15,4 @@ MonoBehaviour:
   prefab: {fileID: 5730679016496745233, guid: bf31363b44c0e6842a5939ac2ef7212a, type: 3}
   forwardForce: 200
   verticalForce: 10
-  timeBetweenLaunches: 0.5
+  timeBetweenLaunches: 1
