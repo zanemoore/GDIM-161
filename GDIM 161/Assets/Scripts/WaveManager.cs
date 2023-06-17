@@ -74,6 +74,9 @@ public class WaveManager : MonoBehaviour
         Set("WaveManagerInstruction1", true);
         Invoke("DisableWaveManagerInstruction1", _timeOnScreen);
 
+        Set("Time", true);
+        Invoke("DisableTime", _timeOnScreen + 2f);
+
         PrepareWaveSpawners();
         SendWave();
         _sendWave = true;
@@ -128,16 +131,29 @@ public class WaveManager : MonoBehaviour
     }
 
 
+    private void DisableTime()
+    {
+        Set("Time", false);
+    }
+
+
     private void Set(string text, bool active)
     {
         GameObject canvas;
         GameObject textUI;
+        GameObject secondsText;
 
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
             canvas = player.transform.Find("Player Canvas").gameObject;
             textUI = canvas.transform.Find(text).gameObject;
             textUI.SetActive(active);
+
+            if (text == "Time")
+            {
+                secondsText = textUI.transform.Find("SecondsText").gameObject;
+                secondsText.GetComponent<TextMeshProUGUI>().text = _totalWaveTime.ToString();
+            }
         }
     }
 }
