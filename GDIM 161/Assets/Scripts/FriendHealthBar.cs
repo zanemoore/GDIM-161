@@ -2,20 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class FriendHealthBar : MonoBehaviour
+public class FriendHealthBar : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject[] blockers;
     [SerializeField] private RawImage health;
     [SerializeField] private int totalHealth = 100;
+
+    [SerializeField] private List<GameObject> players;
+    [SerializeField] private List<int> friendHealth;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         health.color = Color.green;
+        players = new List<GameObject>();
+        friendHealth = new List<int>();
+
+        GetFriends();
+        GetFriendHealth();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Healthbar();
+    }
+
+    private void GetFriends()
+    {
+        foreach (GameObject p in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (p.Equals(this.gameObject))
+            {
+                continue;
+            }
+            else
+            {
+                players.Add(p);
+            }
+        }
+    }
+
+    private void GetFriendHealth()
+    {
+        foreach (GameObject p in players)
+        {
+            friendHealth.Add(p.GetComponent<PlayerHealth>().health);
+        }
+    }
+
+    private void Healthbar()
     {
         if (totalHealth <= 25)
         {

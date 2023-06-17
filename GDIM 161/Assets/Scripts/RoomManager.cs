@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using System.Linq;
 using Photon.Realtime;
+using Photon.Pun.Demo.Cockpit;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -12,10 +14,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] zombieSpawner;
 
+    [SerializeField] private List<GameObject> playerList;
+    [SerializeField] private List<GameObject> spectatorCanvas = new List<GameObject>();
+
     public int numberPlayers;
+    public int playersDead;
+    public bool notLoaded;
+    private bool checkCanvas;
     GameObject localPlayer;
 
-    private void Awake()
+    void Awake()
     {
         for (int i = 0; i < zombieSpawner.Length; i++)
         {
@@ -23,8 +31,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void Start()
+    void Start()
     {
+        checkCanvas = false;
+        notLoaded = true;
+
         if (PhotonNetwork.LocalPlayer.CustomProperties["characterName"] == null)
         {
             PhotonNetwork.LocalPlayer.CustomProperties["characterName"] = 0;
@@ -40,37 +51,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
         GameObject playerToSpawn = players[(int)PhotonNetwork.LocalPlayer.CustomProperties["characterName"]];
         localPlayer = PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoint.position, spawnPoint.rotation);
         localPlayer.GetComponent<PlayerSetup>().IsLocalPlayer();
-
-
-        //determine which spawn point to use based on the number of players
-        /*
-        if (numberPlayers == 1)
-        {
-            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[0].position, spawnPoints[0].rotation, 0);
-        }
-        else if (numberPlayers == 2)
-        {
-            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[1].position, spawnPoints[1].rotation, 0);
-        }
-        else if (numberPlayers == 3)
-        {
-            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[2].position, spawnPoints[2].rotation, 0);
-        }
-        else if (numberPlayers == 4)
-        {
-            PhotonNetwork.Instantiate(playerToSpawn.name, spawnPoints[3].position, spawnPoints[3].rotation, 0);
-        }
-        */
     }
 
     void Update()
     {
         CheckPlayers();
+        CheckPlayersAlive();
+        GetSpectatorCanvas();
     }
 
     void CheckPlayers()
     {
-        numberPlayers = PhotonNetwork.CountOfPlayers;
+        numberPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
         for (int i = 0; i <= numberPlayers; i++)
         {
             if (numberPlayers > 4)
@@ -80,4 +72,41 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void CheckPlayersAlive()
+    {
+        if (playersDead == numberPlayers)
+        {
+            foreach (GameObject canvas in spectatorCanvas)
+            {
+                canvas.SetActive(false);
+            }
+
+            if (PhotonNetwork.IsMasterClient && notLoaded == true)
+            {
+                PhotonNetwork.AutomaticallySyncScene = true;
+                PhotonNetwork.LoadLevel("Lose Screen");
+                notLoaded = false;
+            }
+        }
+    }
+
+    public void GetSpectatorCanvas()
+    {
+        if (checkCanvas == false)
+        {
+            playerList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+
+            foreach (GameObject p in playerList)
+            {
+                foreach (Transform child in p.transform)
+                {
+                    if (child.tag == "Spectator Canvas")
+                    {
+                        spectatorCanvas.Add(child.gameObject);
+                        checkCanvas = true;
+                    }
+                }
+            }
+        }
+    }
 }

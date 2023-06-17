@@ -14,6 +14,7 @@ TagManager:
   - JenHitMarker
   - RHitMarker
   - JohnHitMarker
+  - Spectator Canvas
   layers:
   - Default
   - TransparentFX
