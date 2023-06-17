@@ -11,7 +11,7 @@ public class Football : MonoBehaviourPunCallbacks
     [SerializeField] private float damage = 10f;
     [SerializeField] float currentHealth;
     private bool canDamage = true;
-    private bool hit = false;
+    // private bool hit = false;
     public AudioSource src;
     public AudioClip impact1, impact2, impact3;
     private AudioClip impactToUse;
@@ -56,13 +56,13 @@ public class Football : MonoBehaviourPunCallbacks
         }
 
         hitMarker.enabled = true;
-        hit = true;
+        // hit = true;
         Invoke("ResetHitMarker", 0.2f);
     }
     private void ResetHitMarker()
     {
         hitMarker.enabled = false;
-        hit = false;
+        // hit = false;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -12,7 +12,7 @@ public class ZombieHealth : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
     [SerializeField] private float despawnTime;
-    private bool hit = false;
+    // private bool hit = false;
     public Action<bool> Died; //subscribe functions upon death
     public Action<float> Damaged; //subscribe functions upon taking damage
 
