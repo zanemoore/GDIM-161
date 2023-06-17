@@ -16,18 +16,15 @@ public class WaveManager : MonoBehaviour
 
     [Header("Wave Zombie Spawners")]
     [SerializeField] private float _totalWaveTime;
-    [SerializeField] private int _totalNumWaves;
     [SerializeField] private List<GameObject> _waveZombieSpawners;
     [SerializeField] private bool _useDefaultNumZombiesToSpawn;
-    [SerializeField] private int _initialTotalNumZombies;
-    [SerializeField] private int _addtionalNumZombiesPerWave;
+    [SerializeField] private int _totalNumZombiesToSpawn;
     [SerializeField] private Transform _waveZombiesDestination;
 
     [Header("UI")]
     [SerializeField] private float _timeOnScreen;
 
-    private int _currWave;
-    private bool _sendWaves;
+    private bool _waveSent;
     private int _numZombiesInZone;
     private float _startTime;
 
@@ -47,49 +44,36 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
-        _currWave = 0;
-        _sendWaves = false;
+        _waveSent = false;
         _numZombiesInZone = 0;
+        _startTime = 0f;
     }
 
 
     void Update()
     {
-        if (_sendWaves)
+        if (_waveSent && ((Time.time - _startTime > _totalWaveTime) || IsWaveFinished()))
         {
-            if (Time.time - _startTime > _totalWaveTime)
-            {
-                CleanUp();
-            }
-            else if (IsCurrWaveFinished())
-            {
-                if (_currWave < _totalNumWaves)
-                {
-                    SendNewWave();
-                }
-                else
-                {
-                    CleanUp();
-                }
-            }
+            CleanUp();
         }
     }
 
 
     public void SetUp()
     {
-        _sendWaves = true;
-        _startTime = Time.time;
-
         // Might be nice to make it smooth in the future - Diego
         _entrancePrefab.transform.position = new Vector3(_entrancePrefab.transform.position.x, _closedEntranceHeight, _entrancePrefab.transform.position.z);
 
         Set("WaveManagerInstruction1", true);
         Invoke("DisableWaveManagerInstruction1", _timeOnScreen);
+
+        SendWave();
+        _waveSent = true;
+        _startTime = Time.time;
     }
 
 
-    private void SendNewWave()
+    private void SendWave()
     {
         foreach (GameObject spawnerPrefab in _waveZombieSpawners)
         {
@@ -99,32 +83,29 @@ public class WaveManager : MonoBehaviour
 
             if (!_useDefaultNumZombiesToSpawn)
             {
-                int numberOfZombiesToSpawn = (_initialTotalNumZombies + (_currWave * _addtionalNumZombiesPerWave)) / _waveZombieSpawners.Count;
-                spawner.SetNumberOfZombiesToSpawn(numberOfZombiesToSpawn);
+                int numOfZombiesToSpawn = _totalNumZombiesToSpawn / _waveZombieSpawners.Count;
+                spawner.SetNumberOfZombiesToSpawn(numOfZombiesToSpawn);
             }
 
             spawner.Spawn();
             _numZombiesInZone += spawner.NumberZombiesToSpawn;
         }
-
-        // IMPORTANT: These two lines must come after setting the number of zombies to spawn - Diego
-        _currWave++;
     }
 
 
     private void CleanUp()
     {
-        _sendWaves = false;
-
         // Might be nice to make it smooth in the future - Diego
         _exitPrefab.transform.position = new Vector3(_exitPrefab.transform.position.x, _openedExitHeight, _exitPrefab.transform.position.z);
 
         Set("WaveManagerInstruction2", true);
         Invoke("DisableWaveManagerInstruction2", _timeOnScreen);
+
+        _waveSent = false;
     }
 
 
-    private bool IsCurrWaveFinished()
+    private bool IsWaveFinished()
     {
         return _numZombiesInZone == 0;
     }
@@ -132,7 +113,7 @@ public class WaveManager : MonoBehaviour
 
     public void ZombieDied(bool isWaveZombie)
     {
-        if (_sendWaves && isWaveZombie)
+        if (_waveSent && isWaveZombie)
         {
             _numZombiesInZone = Mathf.Max(0, --_numZombiesInZone);
         }
