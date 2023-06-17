@@ -1935,7 +1935,7 @@ MonoBehaviour:
   characterStats:
   - {fileID: 21300000, guid: 1851c588073bc844d9977458c00e3a88, type: 3}
   - {fileID: 21300000, guid: d8da90c6eb957e948a37533c0f46e047, type: 3}
-  - {fileID: 21300000, guid: ea8fd252bc74eb846b2d65fbe6c2de90, type: 3}
+  - {fileID: 21300000, guid: 1851c588073bc844d9977458c00e3a88, type: 3}
   - {fileID: 21300000, guid: 169d3baf640db7749be3301f5ab71258, type: 3}
   stats: {fileID: 5522715030811954083}
   statImg: {fileID: 328951157917022919}
