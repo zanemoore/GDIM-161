@@ -48,10 +48,10 @@ public class Dart : MonoBehaviourPunCallbacks
         if (true) //currently hardcoded to layer 10 = zombie
         {
             ZombieHealth healthscript = zombie.GetComponentInParent<ZombieHealth>();
-            Debug.Log(healthscript);
+            // Debug.Log(healthscript);
             if (healthscript != null && canDamage)
             {
-                Debug.Log("Collision");
+                // Debug.Log("Collision");
                 healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage); //healthscript.Damage(damage);
                 //currentHealth = healthscript.getHealth();
                 //currentHealth -= damage;

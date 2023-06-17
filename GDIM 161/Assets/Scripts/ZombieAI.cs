@@ -91,7 +91,7 @@ public class ZombieAI : MonoBehaviourPunCallbacks
 
         foreach (GameObject p in players)
         {
-            if (p.GetComponent<PlayerHealth>().health <= 0)
+            if (p != null && p.GetComponent<PlayerHealth>() != null && p.GetComponent<PlayerHealth>().health <= 0)  // I added all these checks to avoid null reference error (i think it happened when someone dc'd? idk :p) - DIego
             {
                 isAwareOfPlayer = false;
                 isAttacking = false;

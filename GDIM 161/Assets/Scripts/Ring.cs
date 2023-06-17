@@ -25,7 +25,7 @@ public class Ring : MonoBehaviourPunCallbacks
 
     private void newImpact()
     {
-        switch(Random.Range(1, 4))
+        switch (Random.Range(1, 4))
         {
             case 1:
                 impactToUse = impact1;
@@ -37,8 +37,20 @@ public class Ring : MonoBehaviourPunCallbacks
                 impactToUse = impact3;
                 break;
         }
-        hitMarker = GameObject.FindWithTag("JenHitMarker").GetComponentInChildren<RawImage>();
-        hitMarker.enabled = false;
+
+        GameObject jenHitMarker = GameObject.FindWithTag("JenHitMarker");
+        if (jenHitMarker != null)
+        {
+            hitMarker = jenHitMarker.GetComponentInChildren<RawImage>();
+            if (hitMarker != null)
+            {
+                hitMarker.enabled = false;
+            }
+        }
+
+        // This was making errors so I got rid of temporarily
+        // hitMarker = GameObject.FindWithTag("JenHitMarker").GetComponentInChildren<RawImage>();
+        // hitMarker.enabled = false;
     }
 
     private void FlashHitMarker()
