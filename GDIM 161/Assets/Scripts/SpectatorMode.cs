@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
-public class SpectatorMode : MonoBehaviour
+public class SpectatorMode : MonoBehaviourPunCallbacks
 {
     [Header("Spectator Camera Settings")]
     [SerializeField] private Vector2 clampInDegrees = new Vector2(360, 180);
@@ -59,6 +60,7 @@ public class SpectatorMode : MonoBehaviour
             playerCamera.SetActive(false);
         }
 
+        spectatorCanvas.SetActive(true);
         playerView.RPC("DisablePlayer", RpcTarget.AllBuffered);
 
         targetDirection = transform.localRotation.eulerAngles;
@@ -161,12 +163,5 @@ public class SpectatorMode : MonoBehaviour
         {
             spectatorControls.SetActive(true);
         }
-    }
-
-    public void ReturnToLobby()
-    {
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.AutomaticallySyncScene = false;
-        PhotonNetwork.LoadLevel(1);
     }
 }

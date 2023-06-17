@@ -16,11 +16,13 @@ public class PlayerHealth : MonoBehaviour
     public int health;
     public bool isAlive;
 
+    public RoomManager roomManager;
     public CharacterAudio characterAudio;
     public GameObject spectatorCamera;
 
     private void Start()
     {
+        roomManager = GameObject.Find("Room Manager").GetComponent<RoomManager>();
         text.text = slider.value.ToString();
         image = bar.GetComponent<Image>();
         //image.enabled = true;
@@ -51,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
                 characterAudio.playDeath();
                 spectatorCamera.SetActive(true);
                 isAlive = false;
+                roomManager.playersDead++;
                 //PhotonNetwork.Destroy(gameObject);
             }
         }

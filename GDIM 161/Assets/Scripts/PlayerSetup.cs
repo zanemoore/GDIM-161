@@ -20,7 +20,6 @@ public class PlayerSetup : MonoBehaviour
     [SerializeField] private GameObject playerHealthbar;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private CapsuleCollider capsuleCollider;
-    [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private CharacterAudio characterAudio;
 
@@ -40,13 +39,11 @@ public class PlayerSetup : MonoBehaviour
         playerHealthbar.SetActive(false);
         meshRenderer.enabled = false;
         capsuleCollider.enabled = false;
-        characterController.enabled = false;
+        playerController.enabled = false;
         playerHealth.enabled = false;
         playerMovement.enabled = false;
         projectileLauncher.enabled = false;
         characterAudio.enabled = false;
-
-        spectatorCanvas.SetActive(true);
     }
 
     [PunRPC]
@@ -56,7 +53,7 @@ public class PlayerSetup : MonoBehaviour
         playerHealthbar.SetActive(true);
         meshRenderer.enabled = true;
         capsuleCollider.enabled = true;
-        characterController.enabled = true;
+        playerController.enabled = true;
         playerHealth.enabled = true;
         playerMovement.enabled = true;
         projectileLauncher.enabled = true;
