@@ -48,4 +48,4 @@ MonoBehaviour:
     type: 3}
   numberOfZombiesToSpawn: 5
   spawnRadius: 10
-  staggerSpawn: 0
+  staggerSpawn: 1

@@ -26,7 +26,6 @@ public class ZombSpawningManager : MonoBehaviour
                 spawner = spawnerPrefabBehind.GetComponent<ZombieSpawner>();
                 spawner.SetZombiesDestination(_behindZombiesDest);
                 spawner.Spawn();
-
             }
 
             Destroy(this.gameObject);
