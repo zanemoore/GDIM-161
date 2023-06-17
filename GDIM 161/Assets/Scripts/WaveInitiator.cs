@@ -1,4 +1,5 @@
- using System.Collections;
+using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,33 +9,26 @@ public class WaveInitiator : MonoBehaviour
     [SerializeField] private GameObject _waveManagerPrefab;
     [SerializeField] private float _minDistanceToInteract;
 
-    private TextMeshProUGUI _objectiveInstructions;
-    private TextMeshProUGUI _allPlayersInZoneReminder;
-
     private WaveManager _waveManager;
     private int _numPlayersNeeded;
-    List<string> _playersInZone;
+    Dictionary<string, GameObject> _playersInZone;
 
     void Start()
     {
         _waveManager = _waveManagerPrefab.GetComponent<WaveManager>();
-        _playersInZone = new List<string>();
+        _playersInZone = new Dictionary<string, GameObject>();
     }
 
 
     void Update()
     {
-        if (_playersInZone.Count > 0)
+        RaycastHit hit;
+
+        if (Camera.main == null)
         {
-            _objectiveInstructions.gameObject.SetActive(true);
-        }
-        else
-        {
-            _objectiveInstructions.gameObject.SetActive(false);
-            _allPlayersInZoneReminder.gameObject.SetActive(false);
+            return;
         }
 
-        RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit, _minDistanceToInteract))
@@ -43,16 +37,16 @@ public class WaveInitiator : MonoBehaviour
             {
                 if (IsAllPlayersInZone())
                 {
-                    _objectiveInstructions.gameObject.SetActive(false);
-                    _allPlayersInZoneReminder.gameObject.SetActive(false);
+                    Set("WaveInitObjective", false);
+                    Set("AllPlayersInZone", false);
 
                     _waveManager.SetUp();
 
-                    Destroy(this);
+                    PhotonNetwork.Destroy(this.gameObject);
                 }
                 else
                 {
-                    _allPlayersInZoneReminder.gameObject.SetActive(true);
+                    Set("AllPlayersInZone", true);
                 }
             }
         }
@@ -66,9 +60,10 @@ public class WaveInitiator : MonoBehaviour
         {
             GameObject player = other.gameObject;
 
-            if (!_playersInZone.Contains(player.name))
+            if (!_playersInZone.ContainsKey(player.name))
             {
-                _playersInZone.Add(player.name);
+                _playersInZone.Add(player.name, player);
+                Set("WaveInitObjective", true, player.name);
             }
         }
     }
@@ -79,7 +74,14 @@ public class WaveInitiator : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            _playersInZone.Remove(other.gameObject.name);
+            GameObject player = other.gameObject;
+
+            if (_playersInZone.ContainsKey(player.name))
+            {
+                Set("WaveInitObjective", false, player.name);
+                Set("AllPlayersInZone", false, player.name);
+                _playersInZone.Remove(player.name);
+            }
         }
     }
 
@@ -87,5 +89,22 @@ public class WaveInitiator : MonoBehaviour
     private bool IsAllPlayersInZone()
     {
         return GameObject.FindGameObjectsWithTag("Player").Length == _playersInZone.Count;
+    }
+
+
+    private void Set(string text, bool active, string player = null)
+    {
+        GameObject canvas;
+        GameObject textUI;
+
+        foreach (var p in _playersInZone)
+        {
+            if (player == null || player == p.Key)
+            {
+                canvas = _playersInZone[p.Key].transform.Find("Player Canvas").gameObject;
+                textUI = canvas.transform.Find(text).gameObject;
+                textUI.SetActive(active);
+            }
+        }
     }
 }

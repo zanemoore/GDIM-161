@@ -69,7 +69,7 @@ public class ZombieHealth : MonoBehaviour
         {
             if (Died != null)
             {
-                Died(this.gameObject.name == "Wave Zombie Capsule(Clone)");
+                Died(this.gameObject.name == "Wave Zombie Capsule(Clone)");  // This is for wave zombies. it's hard coded which is a super bad idea
             }
 
             PhotonNetwork.Destroy(gameObject);

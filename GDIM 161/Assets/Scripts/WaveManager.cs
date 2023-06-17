@@ -26,13 +26,11 @@ public class WaveManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private float _timeOnScreen;
 
-    private TextMeshProUGUI _objectiveInstruction;
-    private TextMeshProUGUI _wavesIndicator;
-
     private int _currWave;
     private bool _sendWaves;
     private int _numZombiesInZone;
     private float _startTime;
+
 
     void Awake()
     {
@@ -42,7 +40,6 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("THERE CAN ONLY BE ONE WAVE MANAGER");
             Destroy(this);
         }
     }
@@ -53,7 +50,6 @@ public class WaveManager : MonoBehaviour
         _currWave = 0;
         _sendWaves = false;
         _numZombiesInZone = 0;
-        
     }
 
 
@@ -84,18 +80,12 @@ public class WaveManager : MonoBehaviour
     {
         _sendWaves = true;
         _startTime = Time.time;
+
         // Might be nice to make it smooth in the future - Diego
         _entrancePrefab.transform.position = new Vector3(_entrancePrefab.transform.position.x, _closedEntranceHeight, _entrancePrefab.transform.position.z);
 
-        _objectiveInstruction.gameObject.SetActive(true);
-        _objectiveInstruction.text = "Survive Until the Gate Opens";
-        Invoke("DisableObjectiveInstruction", _timeOnScreen);
-    }
-
-
-    private bool IsCurrWaveFinished()
-    {
-        return _numZombiesInZone == 0;
+        Set("WaveManagerInstruction1", true);
+        Invoke("DisableWaveManagerInstruction1", _timeOnScreen);
     }
 
 
@@ -119,7 +109,6 @@ public class WaveManager : MonoBehaviour
 
         // IMPORTANT: These two lines must come after setting the number of zombies to spawn - Diego
         _currWave++;
-        UpdateWavesIndicator();
     }
 
 
@@ -130,11 +119,14 @@ public class WaveManager : MonoBehaviour
         // Might be nice to make it smooth in the future - Diego
         _exitPrefab.transform.position = new Vector3(_exitPrefab.transform.position.x, _openedExitHeight, _exitPrefab.transform.position.z);
 
-        _wavesIndicator.gameObject.SetActive(false);
+        Set("WaveManagerInstruction2", true);
+        Invoke("DisableWaveManagerInstruction2", _timeOnScreen);
+    }
 
-        _objectiveInstruction.gameObject.SetActive(true);
-        _objectiveInstruction.text = "Door is Open!\nEscape!";
-        Invoke("DisableObjectiveInstruction", _timeOnScreen);
+
+    private bool IsCurrWaveFinished()
+    {
+        return _numZombiesInZone == 0;
     }
 
 
@@ -147,15 +139,28 @@ public class WaveManager : MonoBehaviour
     }
 
 
-    private void UpdateWavesIndicator()
+    private void DisableWaveManagerInstruction1()
     {
-        _wavesIndicator.gameObject.SetActive(true);
-        _wavesIndicator.text = string.Format("{0} / {1} WAVES", _currWave, _totalNumWaves);
+        Set("WaveManagerInstruction1", false);
     }
 
 
-    private void DisableObjectiveInstruction()
+    private void DisableWaveManagerInstruction2()
     {
-        _objectiveInstruction.gameObject.SetActive(false);
+        Set("WaveManagerInstruction2", false);
+    }
+
+
+    private void Set(string text, bool active)
+    {
+        GameObject canvas;
+        GameObject textUI;
+
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            canvas = player.transform.Find("Player Canvas").gameObject;
+            textUI = canvas.transform.Find(text).gameObject;
+            textUI.SetActive(active);
+        }
     }
 }
