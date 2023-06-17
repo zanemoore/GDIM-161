@@ -32,13 +32,29 @@ public class Football : MonoBehaviourPunCallbacks
                 impactToUse = impact3;
                 break;
         }
+        /*
         //matt = GameObject.Find("Matt");
         hitMarker = GameObject.FindWithTag("JohnHitMarker").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
+        */
+        GameObject johnHitMarker = GameObject.FindWithTag("JohnHitMarker");
+        if (johnHitMarker != null)
+        {
+            hitMarker = johnHitMarker.GetComponentInChildren<RawImage>();
+            if (hitMarker != null)
+            {
+                hitMarker.enabled = false;
+            }
+        }
     }
 
     private void FlashHitMarker()
     {
+        if (hitMarker == null)
+        {
+            return;
+        }
+
         hitMarker.enabled = true;
         hit = true;
         Invoke("ResetHitMarker", 0.2f);
@@ -55,10 +71,10 @@ public class Football : MonoBehaviourPunCallbacks
         if (collision.collider.gameObject.layer == 10) //currently hardcoded to layer 10 = zombie
         {
             ZombieHealth healthscript = collision.collider.GetComponentInParent<ZombieHealth>();
-            Debug.Log(healthscript);
+            // Debug.Log(healthscript);
             if (healthscript != null && canDamage)
             {
-                Debug.Log("Collision");
+                // Debug.Log("Collision");
                 healthscript.GetComponent<PhotonView>().RPC("Damage", RpcTarget.All, damage); //healthscript.Damage(damage);
                 canDamage = false;
                 //currentHealth = healthscript.getHealth();

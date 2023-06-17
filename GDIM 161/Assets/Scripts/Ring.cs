@@ -70,7 +70,7 @@ public class Ring : MonoBehaviourPunCallbacks
 
     public void Hit(GameObject zombie)
     {
-        Debug.Log(bouncesLeft);
+        // Debug.Log(bouncesLeft);
         if (alreadyCollided.Contains(zombie)){ return; }
         newImpact();
         FlashHitMarker();

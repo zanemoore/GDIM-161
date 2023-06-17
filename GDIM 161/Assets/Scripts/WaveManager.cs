@@ -27,7 +27,6 @@ public class WaveManager : MonoBehaviour
     private bool _sendWave;
     private float _startTime;
     private float _timeSinceLastWave;
-    private int _numZombiesSpawned;
 
 
     void Awake()
@@ -48,7 +47,6 @@ public class WaveManager : MonoBehaviour
         _sendWave = false;
         _timeSinceLastWave = 0f;
         _startTime = 0f;
-        _numZombiesSpawned = 0;
     }
 
 
@@ -59,7 +57,7 @@ public class WaveManager : MonoBehaviour
             SendWave();
         }
 
-        if (Time.time - _startTime > _totalWaveTime)
+        if (_sendWave && (Time.time - _startTime > _totalWaveTime))
         {
             CleanUp();
         }

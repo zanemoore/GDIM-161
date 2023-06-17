@@ -32,9 +32,22 @@ public class Baseball : MonoBehaviourPunCallbacks
                 impactToUse = impact3;
                 break;
         }
+
+        /*
         //matt = GameObject.Find("Matt");
         hitMarker = GameObject.FindWithTag("HitMarker").GetComponentInChildren<RawImage>();
         hitMarker.enabled = false;
+        */
+
+        GameObject mattHitMarker = GameObject.FindWithTag("HitMarker");
+        if (mattHitMarker != null)
+        {
+            hitMarker = mattHitMarker.GetComponentInChildren<RawImage>();
+            if (hitMarker != null)
+            {
+                hitMarker.enabled = false;
+            }
+        }
     }
 
     private void FlashHitMarker()
